@@ -46,6 +46,7 @@
         <module>codegen-common</module>
         <module>codegen-ui</module>
         <module>codegen-web</module>
+        <module>codegen-docs</module>
     </modules>
 
     <properties>
