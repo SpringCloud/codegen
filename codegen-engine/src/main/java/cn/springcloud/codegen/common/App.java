@@ -1,4 +1,4 @@
-package cn.springcloud.codegen;
+package cn.springcloud.codegen.common;
 
 /**
  * Hello world!
