@@ -9,14 +9,11 @@ import cn.springcloud.codegen.engine.tools.ClassTools;
 import cn.springcloud.codegen.engine.tools.FileTools;
 import cn.springcloud.codegen.engine.tools.JsonTools;
 import cn.springcloud.codegen.engine.tools.ReadXmlFileTools;
-import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import freemarker.template.TemplateException;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Field;
 import java.util.Map;
 
 /**
@@ -31,7 +28,7 @@ public class EurekaCodeGenConfigTest {
 
     public static void main(String[] args) {
 
-        String fileDir =  EurekaCodeGenTest.class.getResource("/").getPath() + "templates/xml_config/eureka_component_xml.xml";
+        String fileDir =  EurekaCodeGenConfigTest.class.getResource("/").getPath() + "templates/xml_config/eureka_component_xml.xml";
         Object o = ReadXmlFileTools.readXmlFile(fileDir);
         JSONArray jsonArray = (JSONArray) JsonTools.objectToJson(o);
         for (int i = 0; i < jsonArray.size(); i++){
