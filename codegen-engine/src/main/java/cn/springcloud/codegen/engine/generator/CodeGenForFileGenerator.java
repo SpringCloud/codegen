@@ -2,11 +2,11 @@ package cn.springcloud.codegen.engine.generator;
 
 import cn.springcloud.codegen.engine.entity.InputParams;
 import cn.springcloud.codegen.engine.entity.InputParamsContext;
+import cn.springcloud.codegen.engine.tools.MapTools;
 import cn.springcloud.codegen.engine.tools.ObjectCopyValueToVoTools;
 import cn.springcloud.codegen.engine.tools.TransforParamTools;
 
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -25,6 +25,8 @@ public abstract class CodeGenForFileGenerator extends CodeGenEngineGenerator {
     private InputParams inputParams;
     private Map<String, Object> tempateData;
     private Map<String, Object> otherData;
+    private Map<String, Object> cacheData;
+    private Map<String, Object> extendData;
 
     /**
      * 输出全部参数模型
@@ -34,14 +36,21 @@ public abstract class CodeGenForFileGenerator extends CodeGenEngineGenerator {
         this.inputParams = inputParams;
     }
 
+
+    public CodeGenForFileGenerator(InputParams inputParams, Map<String, Object> templateData){
+        this.inputParams = inputParams;
+        this.tempateData = templateData;
+    }
+
     /**
      * 模板参数又外部输入
      * @param inputParams
      * @param templateData
      */
-    public CodeGenForFileGenerator(InputParams inputParams, Map<String, Object> templateData){
+    public CodeGenForFileGenerator(InputParams inputParams, Map<String, Object> templateData, List<CodeGenExtendGenerator> extendGenerators){
         this.inputParams = inputParams;
         this.tempateData = templateData;
+        this.extendData = getExtendData(extendGenerators);
     }
 
     /**
@@ -119,7 +128,16 @@ public abstract class CodeGenForFileGenerator extends CodeGenEngineGenerator {
 
     @Override
     public Map<String, Object> getData() {
-        return this.tempateData == null ? getTemplateData() : this.tempateData;
+        if (this.cacheData != null){
+            return this.cacheData;
+        }
+        Map<String, Object> data = this.tempateData == null ? getTemplateData() : this.tempateData;
+        if (this.extendData != null){
+            MapTools.addMap(data, this.extendData);
+        }
+        cacheData = new HashMap<String, Object>();
+        cacheData.putAll(data);
+        return cacheData;
     }
 
     @Override
@@ -147,4 +165,15 @@ public abstract class CodeGenForFileGenerator extends CodeGenEngineGenerator {
      * @return
      */
     public abstract Map<String, Object> getTemplateData();
+
+    public Map<String, Object> getExtendData(List<CodeGenExtendGenerator> extendGenerators){
+        Map<String, Object> data = new HashMap<String, Object>();
+        if (extendGenerators != null){
+            for (CodeGenExtendGenerator extendGenerator : extendGenerators){
+                Map<String, Object> extendData = extendGenerator.getExtendData();
+                MapTools.addMap(data, extendData);
+            }
+        }
+        return data;
+    }
 }

@@ -34,6 +34,17 @@
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-starter-eureka-server</artifactId>
             </dependency>
+            <#if pomDependencyKey?exists>
+                <#list pomDependencyKey as model>
+                <dependency>
+                    <groupId>${model.groupId}</groupId>
+                    <artifactId>${model.artifactId}</artifactId>
+                    <#if model.version?exists>
+                    <version>${model.version}</version>
+                    </#if>
+                </dependency>
+                </#list>
+            </#if>
         </dependencies>
 
     <build>

@@ -1,35 +1,32 @@
-package cn.springcloud.codegen.engine.eureka_config;
+package cn.springcloud.codegen.engine.feign;
 
 import cn.springcloud.codegen.engine.constants.CodeGenConstants;
 import cn.springcloud.codegen.engine.entity.CodeOutType;
 import cn.springcloud.codegen.engine.entity.InputParams;
-import cn.springcloud.codegen.engine.generator.CodeGenExtendGenerator;
 import cn.springcloud.codegen.engine.generator.CodeGenForFileGenerator;
 import cn.springcloud.codegen.engine.service.ExtendService;
-import cn.springcloud.codegen.engine.tools.MapTools;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
- * Created with IntelliJ IDEA.
- *
- * @author: zzf
- * @date: 2018/1/21
- * @time: 0:29
- * @description : eureka java 类的生成
+ * @author Vincent.
+ * @createdOn 2018/01/27 18:55
  */
-public class EurekaComponentGenerator extends CodeGenForFileGenerator{
+public class FeignFileGenerator extends CodeGenForFileGenerator {
 
     // 其他的数据
     Map<String, Object> otherData = null;
 
-    public EurekaComponentGenerator(InputParams inputParams, Map<String, Object> templateData, Map<String, Object> otherData) {
+    public FeignFileGenerator(InputParams inputParams, Map<String, Object> templateData, Map<String, Object> otherData) {
         super(inputParams, templateData);
         this.otherData = otherData;
     }
 
-    public EurekaComponentGenerator(InputParams inputParams, Map<String, Object> templateData, Map<String, Object> otherData, List<CodeGenExtendGenerator> extendGenerators) {
-        super(inputParams, templateData, extendGenerators);
+    public FeignFileGenerator(InputParams inputParams, Map<String, Object> templateData, Map<String, Object> otherData, List<ExtendService> extendServices) {
+        super(inputParams, templateData);
+//        super.setExtendServices(extendServices);
         this.otherData = otherData;
     }
 
@@ -40,6 +37,7 @@ public class EurekaComponentGenerator extends CodeGenForFileGenerator{
     @Override
     public Map<String, Object> getTemplateData() {
         Map<String, Object> template = new HashMap<String, Object>();
+        template.put(CodeGenConstants.CLASS_ANNOTATION_KEY,"//test");
         return template;
     }
 

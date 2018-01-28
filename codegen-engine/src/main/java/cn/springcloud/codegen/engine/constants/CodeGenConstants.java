@@ -1,8 +1,6 @@
 package cn.springcloud.codegen.engine.constants;
 
 
-import jdk.nashorn.internal.objects.Global;
-
 /**
  * Created with IntelliJ IDEA.
  *
@@ -32,6 +30,12 @@ public class CodeGenConstants {
      * 文件切个类型
      */
     public static final String FILE_SEPARATOR = "/";
+
+    public static final String CLASS_ANNOTATION_KEY = "classAnnotationKey";
+
+    public static final String CLASS_IMPORT_KEY = "classImportKey";
+
+    public static final String POM_DEPENDENCY_KEY = "pomDependencyKey";
 
     /**
      *  生成目录下的片接
