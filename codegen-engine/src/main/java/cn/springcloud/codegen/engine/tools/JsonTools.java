@@ -50,6 +50,7 @@ public class JsonTools {
             System.out.println("json对象");
             JSONArray jsonArray = new JSONArray();
             jsonArray.add(obj);
+            return jsonArray;
         }
         return (JSONArray) JsonTools.objectToJson(obj);
     }
