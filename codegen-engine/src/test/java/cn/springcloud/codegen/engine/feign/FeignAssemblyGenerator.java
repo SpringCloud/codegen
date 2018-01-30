@@ -1,18 +1,14 @@
 package cn.springcloud.codegen.engine.feign;
 
-import cn.springcloud.codegen.engine.EurekaCodeGenConfigTest;
 import cn.springcloud.codegen.engine.constants.CodeGenConstants;
 import cn.springcloud.codegen.engine.entity.CodeOutType;
 import cn.springcloud.codegen.engine.entity.ConfigParams;
 import cn.springcloud.codegen.engine.entity.InputParams;
-import cn.springcloud.codegen.engine.eureka_config.EurekaComponentGenerator;
 import cn.springcloud.codegen.engine.generator.CodeGenExtendGenerator;
-import cn.springcloud.codegen.engine.service.ExtendService;
 import cn.springcloud.codegen.engine.tools.ClassTools;
 import cn.springcloud.codegen.engine.tools.FileTools;
 import cn.springcloud.codegen.engine.tools.JsonTools;
 import cn.springcloud.codegen.engine.tools.ReadXmlFileTools;
-import com.alibaba.fastjson.JSONArray;
 import freemarker.template.TemplateException;
 import org.apache.commons.lang3.StringUtils;
 
@@ -52,7 +48,7 @@ public class FeignAssemblyGenerator {
 
         try {
 
-            String classPath = ClassTools.getAbsolutePathOfClassLoaderClassPath(EurekaComponentGenerator.class);
+            String classPath = ClassTools.getAbsolutePathOfClassLoaderClassPath(FeignAssemblyGenerator.class);
             inputParams.setTemplateDir(classPath + File.separator + inputParams.getTemplateDir());
             if (inputParam != null){
                 if (StringUtils.isNotBlank(inputParam.getDynamicOutPath())){
