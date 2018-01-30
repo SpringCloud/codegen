@@ -1,4 +1,4 @@
-package cn.springcloud.codegen.common;
+package cn.springcloud.codegen;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

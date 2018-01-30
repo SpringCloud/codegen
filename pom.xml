@@ -50,6 +50,7 @@
         <commons.lang3.version>3.4</commons.lang3.version>
         <commons-beanutils.version>1.9.3</commons-beanutils.version>
         <slf4j-log4j12.version>1.7.22</slf4j-log4j12.version>
+        <swagger.version>2.7.0</swagger.version>
 
     </properties>
 
@@ -60,6 +61,13 @@
                 <artifactId>codegen-engine</artifactId>
                 <version>${project.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>codegen-web</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
 
             <dependency>
                 <groupId>org.springframework.boot</groupId>
@@ -102,6 +110,19 @@
                 <artifactId>slf4j-log4j12</artifactId>
                 <version>${slf4j-log4j12.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>${swagger.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger-ui</artifactId>
+                <version>${swagger.version}</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 

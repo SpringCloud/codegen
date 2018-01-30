@@ -1,4 +1,4 @@
-package cn.springcloud.codegen.common.utils;
+package cn.springcloud.codegen.utils;
 
 import java.io.*;
 

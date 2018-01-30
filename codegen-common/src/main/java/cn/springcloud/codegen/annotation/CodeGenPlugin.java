@@ -1,4 +1,4 @@
-package cn.springcloud.codegen.common.annotation;
+package cn.springcloud.codegen.annotation;
 
 /**
  * 代码生成器插件
