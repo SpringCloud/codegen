@@ -5,10 +5,7 @@ import cn.springcloud.codegen.engine.entity.CodeOutType;
 import cn.springcloud.codegen.engine.entity.ConfigParams;
 import cn.springcloud.codegen.engine.entity.InputParams;
 import cn.springcloud.codegen.engine.eureka_config.EurekaComponentGenerator;
-import cn.springcloud.codegen.engine.tools.ClassTools;
-import cn.springcloud.codegen.engine.tools.FileTools;
-import cn.springcloud.codegen.engine.tools.JsonTools;
-import cn.springcloud.codegen.engine.tools.ReadXmlFileTools;
+import cn.springcloud.codegen.engine.tools.*;
 import com.alibaba.fastjson.JSONArray;
 import freemarker.template.TemplateException;
 
@@ -29,8 +26,7 @@ public class EurekaCodeGenConfigTest {
     public static void main(String[] args) {
 
         String fileDir =  EurekaCodeGenConfigTest.class.getResource("/").getPath() + "templates/xml_config/eureka_component_xml.xml";
-        Object o = ReadXmlFileTools.readXmlFile(fileDir);
-        JSONArray jsonArray = (JSONArray) JsonTools.objectToJson(o);
+        JSONArray jsonArray = TransforParamTools.transforXmlToJsonArray(fileDir);
         for (int i = 0; i < jsonArray.size(); i++){
             ConfigParams configParams = JsonTools.parseObjectByGenericity(jsonArray.getString(i), ConfigParams.class);
             // 输出对象
