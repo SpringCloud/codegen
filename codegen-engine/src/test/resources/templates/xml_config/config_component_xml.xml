@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<components>
+	<component category="java">
+		<initData>
+			<dynamicOutPath>D:\\spring-cloud-codegene-test</dynamicOutPath>
+			<fileType>java</fileType>
+			<fileName>ConfigApplication</fileName>
+			<templateName>ConfigApplication.java.ftl</templateName>
+			<templateDir>templates/config/java/</templateDir>
+			<moduleName>config-server</moduleName>
+			<packageName>cn.springcloud.codegen.component.config</packageName>
+			<templateConfigEncode>CodeGenConstants.DEFAULT_ENCODE</templateConfigEncode>
+		</initData>
+		<templateData>
+			<packageName>cn.springcloud.codegen.component.config</packageName>
+		</templateData>
+		<otherData>
+			<isJavaOrResourcesOrOtherCode>CodeOutType.JAVA</isJavaOrResourcesOrOtherCode>
+		</otherData>
+	</component>
+	<component category="resources">
+		<initData>
+			<dynamicOutPath>D:\\spring-cloud-codegene-test</dynamicOutPath>
+			<fileType>properties</fileType>
+			<fileName>application</fileName>
+			<templateName>application.properties.ftl</templateName>
+			<templateDir>templates/config/resources/</templateDir>
+			<moduleName>config-server</moduleName>
+			<packageName></packageName>
+			<templateConfigEncode>CodeGenConstants.DEFAULT_ENCODE</templateConfigEncode>
+		</initData>
+		<templateData>
+			<serviceName>config-server</serviceName>
+		</templateData>
+		<otherData>
+			<isJavaOrResourcesOrOtherCode>CodeOutType.RESOURCES</isJavaOrResourcesOrOtherCode>
+		</otherData>
+	</component>
+	<component category="pom">
+		<initData>
+			<dynamicOutPath>D:\\spring-cloud-codegene-test</dynamicOutPath>
+			<fileType>xml</fileType>
+			<fileName>pom</fileName>
+			<templateName>pom.xml.ftl</templateName>
+			<templateDir>templates/config/</templateDir>
+			<moduleName>config-server</moduleName>
+			<packageName></packageName>
+			<templateConfigEncode>CodeGenConstants.DEFAULT_ENCODE</templateConfigEncode>
+		</initData>
+		<templateData>
+			<pomArtifactId>config-server</pomArtifactId>
+			<pomName>config-server</pomName>
+			<pomArtifactId>config-server</pomArtifactId>
+			<springBootVersion>1.5.9</springBootVersion>
+			<javaVersion>1.8</javaVersion>
+		</templateData>
+		<otherData>
+			<isJavaOrResourcesOrOtherCode>CodeOutType.NONE</isJavaOrResourcesOrOtherCode>
+		</otherData>
+	</component>
+</components>
