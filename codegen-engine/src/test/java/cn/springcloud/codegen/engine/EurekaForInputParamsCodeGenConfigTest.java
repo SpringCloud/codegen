@@ -1,8 +1,6 @@
 package cn.springcloud.codegen.engine;
 
 import cn.springcloud.codegen.engine.component.CodeGenComponent;
-import cn.springcloud.codegen.engine.constants.CodeGenConstants;
-import cn.springcloud.codegen.engine.entity.CodeOutType;
 import cn.springcloud.codegen.engine.entity.ConfigParams;
 import cn.springcloud.codegen.engine.entity.InputParams;
 import cn.springcloud.codegen.engine.tools.*;
@@ -21,11 +19,11 @@ import java.util.Map;
  * @time: 14:04
  * @description : do some thing
  */
-public class EurekaCodeGenConfigTest {
+public class EurekaForInputParamsCodeGenConfigTest {
 
     public static void main(String[] args) {
 
-        String fileDir =  EurekaCodeGenConfigTest.class.getResource("/").getPath() + "templates/xml_config/eureka_component_xml.xml";
+        String fileDir =  EurekaForInputParamsCodeGenConfigTest.class.getResource("/").getPath() + "templates/xml_config/eureka_component_xml.xml";
         JSONArray jsonArray = TransforParamTools.transforXmlToJsonArray(fileDir);
         for (int i = 0; i < jsonArray.size(); i++){
             ConfigParams configParams = JsonTools.parseObjectByGenericity(jsonArray.getString(i), ConfigParams.class);
@@ -37,7 +35,7 @@ public class EurekaCodeGenConfigTest {
 
             try {
 
-                String classPath = ClassTools.getAbsolutePathOfClassLoaderClassPath(EurekaCodeGenConfigTest.class);
+                String classPath = ClassTools.getAbsolutePathOfClassLoaderClassPath(EurekaForInputParamsCodeGenConfigTest.class);
                 inputParams.setTemplateDir(classPath + File.separator + inputParams.getTemplateDir());
                 new CodeGenComponent(inputParams, templateData, otherData).genrator();
             } catch (IOException e) {
