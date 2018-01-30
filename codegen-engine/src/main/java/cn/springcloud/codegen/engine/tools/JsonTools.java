@@ -40,12 +40,12 @@ public class JsonTools {
 
     /**
      * 将map 转化成json数组
-     * @param map
+     * @param o
      * @return
      */
-    public static JSONArray parseMapToJsonArray(Map<String, Object> map){
+    public static JSONArray parseObjectToJsonArray(Object o){
 
-        Object obj = objectToJson(map);
+        Object obj = objectToJson(o);
         if(obj instanceof JSONObject){
             System.out.println("json对象");
             JSONArray jsonArray = new JSONArray();

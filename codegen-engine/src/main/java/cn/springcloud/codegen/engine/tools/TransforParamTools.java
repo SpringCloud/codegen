@@ -3,6 +3,7 @@ package cn.springcloud.codegen.engine.tools;
 import cn.springcloud.codegen.engine.constants.CodeGenConstants;
 import cn.springcloud.codegen.engine.entity.InputParams;
 import cn.springcloud.codegen.engine.entity.InputParamsContext;
+import com.alibaba.fastjson.JSONArray;
 import org.apache.commons.lang3.StringUtils;
 
 import java.io.File;
@@ -17,6 +18,22 @@ import java.io.File;
  */
 public class TransforParamTools {
 
+    /**
+     * 输入的是xml 文件所在位置
+     * @param xmlPath
+     * @return
+     */
+    public static JSONArray transforXmlToJsonArray(String xmlPath){
+
+        Object o = ReadXmlFileTools.readXmlFile(xmlPath);
+        return JsonTools.parseObjectToJsonArray(o);
+    }
+
+    /**
+     * 转化成输入的参数模式
+     * @param ipc
+     * @return
+     */
     public static InputParams transforParam(InputParamsContext ipc){
 
         InputParams in = new InputParams();
