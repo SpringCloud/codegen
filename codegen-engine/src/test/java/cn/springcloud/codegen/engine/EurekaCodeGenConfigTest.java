@@ -1,5 +1,6 @@
 package cn.springcloud.codegen.engine;
 
+import cn.springcloud.codegen.engine.component.CodeGenComponent;
 import cn.springcloud.codegen.engine.constants.CodeGenConstants;
 import cn.springcloud.codegen.engine.entity.CodeOutType;
 import cn.springcloud.codegen.engine.entity.ConfigParams;
@@ -35,22 +36,11 @@ public class EurekaCodeGenConfigTest {
             Map templateData = JsonTools.parseObjectByGenericity(configParams.getTemplateData(), Map.class);
             Map otherData = JsonTools.parseObjectByGenericity(configParams.getOtherData(), Map.class);
 
-
-            // 这个值和CodeOutType 可以抽象到父类中。
-            String ss = FileTools.getTypeValue(inputParams.getTemplateConfigEncode());
-            System.out.println(ss);
-            Object constValue = CodeGenConstants.getConstValue(FileTools.getTypeValue(inputParams.getTemplateConfigEncode()));
-            inputParams.setTemplateConfigEncode(constValue.toString());
-
-            CodeOutType codeOutType = CodeOutType.getType(FileTools.getTypeValue(String.valueOf(otherData.get("isJavaOrResourcesOrOtherCode"))));
-            otherData.put("isJavaOrResourcesOrOtherCode", codeOutType);
-            System.out.println("=================== 分割线 ====================");
-
             try {
 
                 String classPath = ClassTools.getAbsolutePathOfClassLoaderClassPath(EurekaComponentGenerator.class);
                 inputParams.setTemplateDir(classPath + File.separator + inputParams.getTemplateDir());
-                new EurekaComponentGenerator(inputParams, templateData, otherData).genrator();
+                new CodeGenComponent(inputParams, templateData, otherData).genrator();
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (TemplateException e) {
