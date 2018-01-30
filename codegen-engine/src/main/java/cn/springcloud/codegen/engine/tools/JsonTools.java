@@ -1,8 +1,11 @@
 package cn.springcloud.codegen.engine.tools;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 
 import java.io.*;
+import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -33,6 +36,22 @@ public class JsonTools {
     public static <T> T parseObjectByGenericity(String jsonStr, Class<T> clazz){
         T t = JSON.parseObject(jsonStr, clazz);
         return t;
+    }
+
+    /**
+     * 将map 转化成json数组
+     * @param map
+     * @return
+     */
+    public static JSONArray parseMapToJsonArray(Map<String, Object> map){
+
+        Object obj = objectToJson(map);
+        if(obj instanceof JSONObject){
+            System.out.println("json对象");
+            JSONArray jsonArray = new JSONArray();
+            jsonArray.add(obj);
+        }
+        return (JSONArray) JsonTools.objectToJson(obj);
     }
 
     /**
