@@ -1,14 +1,12 @@
 package cn.springcloud.codegen.engine;
 
+import cn.springcloud.codegen.engine.component.CodeGenComponent;
 import cn.springcloud.codegen.engine.constants.CodeGenConstants;
 import cn.springcloud.codegen.engine.entity.CodeOutType;
 import cn.springcloud.codegen.engine.entity.ConfigParams;
 import cn.springcloud.codegen.engine.entity.InputParams;
-import cn.springcloud.codegen.engine.eureka_config.EurekaComponentGenerator;
 import cn.springcloud.codegen.engine.feign.FeignAssemblyGenerator;
-import cn.springcloud.codegen.engine.feign.FeignDataGenerator;
 import cn.springcloud.codegen.engine.generator.CodeGenExtendGenerator;
-import cn.springcloud.codegen.engine.service.ExtendService;
 import cn.springcloud.codegen.engine.tools.ClassTools;
 import cn.springcloud.codegen.engine.tools.FileTools;
 import cn.springcloud.codegen.engine.tools.JsonTools;
@@ -18,7 +16,6 @@ import freemarker.template.TemplateException;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -30,7 +27,7 @@ public class EurekaWithFeignTest {
 
     public static void main(String[] args) {
 
-        String fileDir =  EurekaCodeGenConfigTest.class.getResource("/").getPath() + "templates/xml_config/eureka_component_xml.xml";
+        String fileDir =  EurekaForInputParamsCodeGenConfigTest.class.getResource("/").getPath() + "templates/xml_config/eureka_component_xml.xml";
         Object o = ReadXmlFileTools.readXmlFile(fileDir);
         JSONArray jsonArray = (JSONArray) JsonTools.objectToJson(o);
         boolean isExecuted = false;
@@ -55,14 +52,15 @@ public class EurekaWithFeignTest {
 
             try {
 
-                String classPath = ClassTools.getAbsolutePathOfClassLoaderClassPath(EurekaComponentGenerator.class);
+                String classPath = ClassTools.getAbsolutePathOfClassLoaderClassPath(EurekaWithFeignTest.class);
                 inputParams.setTemplateDir(classPath + File.separator + inputParams.getTemplateDir());
                 List<CodeGenExtendGenerator> extendServices = null;
                 if (!isExecuted){
                     extendServices = new FeignAssemblyGenerator().execute(inputParams);
                     isExecuted = true;
                 }
-                new EurekaComponentGenerator(inputParams, templateData, otherData, extendServices).genrator();
+
+               new CodeGenComponent(inputParams, templateData, extendServices, otherData).genrator();
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (TemplateException e) {
