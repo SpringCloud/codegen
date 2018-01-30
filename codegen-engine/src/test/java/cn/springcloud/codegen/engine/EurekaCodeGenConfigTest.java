@@ -5,7 +5,6 @@ import cn.springcloud.codegen.engine.constants.CodeGenConstants;
 import cn.springcloud.codegen.engine.entity.CodeOutType;
 import cn.springcloud.codegen.engine.entity.ConfigParams;
 import cn.springcloud.codegen.engine.entity.InputParams;
-import cn.springcloud.codegen.engine.eureka_config.EurekaComponentGenerator;
 import cn.springcloud.codegen.engine.tools.*;
 import com.alibaba.fastjson.JSONArray;
 import freemarker.template.TemplateException;
@@ -38,7 +37,7 @@ public class EurekaCodeGenConfigTest {
 
             try {
 
-                String classPath = ClassTools.getAbsolutePathOfClassLoaderClassPath(EurekaComponentGenerator.class);
+                String classPath = ClassTools.getAbsolutePathOfClassLoaderClassPath(EurekaCodeGenConfigTest.class);
                 inputParams.setTemplateDir(classPath + File.separator + inputParams.getTemplateDir());
                 new CodeGenComponent(inputParams, templateData, otherData).genrator();
             } catch (IOException e) {
