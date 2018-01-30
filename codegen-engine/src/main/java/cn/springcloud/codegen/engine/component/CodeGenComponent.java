@@ -4,9 +4,11 @@ import cn.springcloud.codegen.engine.constants.CodeGenConstants;
 import cn.springcloud.codegen.engine.entity.CodeOutType;
 import cn.springcloud.codegen.engine.entity.InputParams;
 import cn.springcloud.codegen.engine.entity.InputParamsContext;
+import cn.springcloud.codegen.engine.generator.CodeGenExtendGenerator;
 import cn.springcloud.codegen.engine.generator.CodeGenForFileGenerator;
 import cn.springcloud.codegen.engine.tools.FileTools;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -28,6 +30,12 @@ public final class CodeGenComponent extends CodeGenForFileGenerator {
 
     public CodeGenComponent(InputParams inputParams, Map<String, Object> templateData, Map<String, Object> otherData) {
         super(inputParams, templateData, otherData);
+        this.otherData = otherData;
+        transforParam(inputParams);
+    }
+
+    public CodeGenComponent(InputParams inputParams, Map<String, Object> templateData, List<CodeGenExtendGenerator> extendGenerators, Map<String, Object> otherData) {
+        super(inputParams, templateData, extendGenerators);
         this.otherData = otherData;
         transforParam(inputParams);
     }
@@ -55,6 +63,6 @@ public final class CodeGenComponent extends CodeGenForFileGenerator {
     private void transforParam(InputParams inputParams){
 
         Object constValue = CodeGenConstants.getConstValue(FileTools.getTypeValue(inputParams.getTemplateConfigEncode()));
-        inputParams.setTemplateConfigEncode(constValue.toString());
+        inputParams.setTemplateConfigEncode(constValue == null ? "" : constValue.toString());
     }
 }
