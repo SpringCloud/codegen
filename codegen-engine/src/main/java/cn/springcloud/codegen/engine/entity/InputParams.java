@@ -1,6 +1,10 @@
 package cn.springcloud.codegen.engine.entity;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -13,36 +17,30 @@ import java.io.Serializable;
 public class InputParams extends BaseInputParams implements Serializable{
 
     private static final long serialVersionUID = -1377887339408890399L;
-    private String templateConfigEncode;
-    private String templateDir;
+    private Map<String, String> paramMap = new HashMap<>();
 
-
-    public InputParams(String templateConfigEncode, String dynamicOutPath,
-                       String templateDir, String packageName,String templateName,
-                       String fileName, String fileType, String moduleName) {
+    public InputParams(String dynamicOutPath, Map<String, String> paramMap) {
 
         // 父类的构造方法
-        super(templateName, fileName, fileType, dynamicOutPath, moduleName, packageName);
-        this.templateConfigEncode = templateConfigEncode;
-        this.templateDir = templateDir;
+        super(dynamicOutPath);
+        this.paramMap = paramMap;
     }
 
     public InputParams(){}
 
-    public String getTemplateConfigEncode() {
-        return templateConfigEncode;
+
+    public String getString(String key){
+        if (StringUtils.isBlank(paramMap.get(key))) {
+            throw new IllegalArgumentException("get value by key [" + key +"] is null");
+        }
+        return paramMap.get(key);
     }
 
-    public void setTemplateConfigEncode(String templateConfigEncode) {
-        this.templateConfigEncode = templateConfigEncode;
+    public Map<String, String> getParamMap() {
+        return paramMap;
     }
 
-    public String getTemplateDir() {
-        return templateDir;
+    public void setParamMap(Map<String, String> paramMap) {
+        this.paramMap = paramMap;
     }
-
-    public void setTemplateDir(String templateDir) {
-        this.templateDir = templateDir;
-    }
-
 }

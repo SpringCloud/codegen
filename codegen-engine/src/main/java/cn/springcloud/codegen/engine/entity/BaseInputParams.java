@@ -13,47 +13,14 @@ import java.io.Serializable;
 public class BaseInputParams implements Serializable{
 
     private static final long serialVersionUID = 2822361127561108856L;
-    private String templateName;
-    private String fileName;
-    private String fileType;
     private String dynamicOutPath;
-    private String moduleName;
-    private String packageName;
 
-    public BaseInputParams(String templateName, String fileName, String fileType, String dynamicOutPath, String moduleName, String packageName) {
-        this.templateName = templateName;
-        this.fileName = fileName;
-        this.fileType = fileType;
+    public BaseInputParams(String dynamicOutPath) {
         this.dynamicOutPath = dynamicOutPath;
-        this.moduleName = moduleName;
-        this.packageName = packageName;
     }
 
     public BaseInputParams() {}
 
-    public String getTemplateName() {
-        return templateName;
-    }
-
-    public void setTemplateName(String templateName) {
-        this.templateName = templateName;
-    }
-
-    public String getFileName() {
-        return fileName;
-    }
-
-    public void setFileName(String fileName) {
-        this.fileName = fileName;
-    }
-
-    public String getFileType() {
-        return fileType;
-    }
-
-    public void setFileType(String fileType) {
-        this.fileType = fileType;
-    }
 
     public String getDynamicOutPath() {
         return dynamicOutPath;
@@ -63,19 +30,4 @@ public class BaseInputParams implements Serializable{
         this.dynamicOutPath = dynamicOutPath;
     }
 
-    public String getModuleName() {
-        return moduleName;
-    }
-
-    public void setModuleName(String moduleName) {
-        this.moduleName = moduleName;
-    }
-
-    public String getPackageName() {
-        return packageName;
-    }
-
-    public void setPackageName(String packageName) {
-        this.packageName = packageName;
-    }
 }

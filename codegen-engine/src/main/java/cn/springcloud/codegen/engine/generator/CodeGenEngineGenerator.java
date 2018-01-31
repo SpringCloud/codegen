@@ -2,11 +2,14 @@ package cn.springcloud.codegen.engine.generator;
 
 import cn.springcloud.codegen.engine.constants.CodeGenConstants;
 import cn.springcloud.codegen.engine.entity.CodeOutType;
+import cn.springcloud.codegen.engine.entity.GeneratorMetadata;
+import cn.springcloud.codegen.engine.entity.InputParams;
 import cn.springcloud.codegen.engine.exception.CodeGenException;
 import cn.springcloud.codegen.engine.service.ClassService;
 import cn.springcloud.codegen.engine.service.OutFileService;
 import cn.springcloud.codegen.engine.service.TemplateConfigService;
 import cn.springcloud.codegen.engine.tools.FileTools;
+import cn.springcloud.codegen.engine.tools.GeneratorDataContext;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
@@ -16,6 +19,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * Created with IntelliJ IDEA.
@@ -31,7 +36,7 @@ import java.io.*;
 public abstract class CodeGenEngineGenerator implements TemplateConfigService, OutFileService, ClassService {
 
     private final Logger LOGGER = LoggerFactory.getLogger(CodeGenEngineGenerator.class);
-
+    
     /**
      * 代码生成
      *
@@ -83,7 +88,7 @@ public abstract class CodeGenEngineGenerator implements TemplateConfigService, O
      * @return
      */
     private String getDefaultEncode() {
-        return (getTemplateConfigEncode() == null || getTemplateConfigEncode() == "") ? CodeGenConstants.DEFAULT_ENCODE : getTemplateConfigEncode();
+        return (getTemplateConfigEncode() == null || "".equals(getTemplateConfigEncode())) ? CodeGenConstants.DEFAULT_ENCODE : getTemplateConfigEncode();
     }
 
     /**
