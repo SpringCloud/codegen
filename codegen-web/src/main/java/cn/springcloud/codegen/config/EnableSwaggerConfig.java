@@ -15,6 +15,9 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
+/**
+ * @author xujin
+ */
 @Configuration
 @EnableSwagger2
 public class EnableSwaggerConfig extends WebMvcConfigurerAdapter {
@@ -50,7 +53,8 @@ public class EnableSwaggerConfig extends WebMvcConfigurerAdapter {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage(basePackage)) // 扫描该包下的所有需要在Swagger中展示的API，@ApiIgnore注解标注的除外
+                // 扫描该包下的所有需要在Swagger中展示的API，@ApiIgnore注解标注的除外
+                .apis(RequestHandlerSelectors.basePackage(basePackage))
                 .paths(PathSelectors.any())
                 .build();
     }
