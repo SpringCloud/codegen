@@ -1,10 +1,14 @@
 
 package cn.springcloud.codegen.engine.tools;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import java.lang.reflect.Field;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -85,4 +89,57 @@ public class ClassTools {
      public static String getClassFullPath(Class clazz){
          return clazz.getName();
      }
+
+    /**
+     * 封装入参的属性为以属性名为key，值为value的map
+     * @param inputParams
+     * @param includeFieldTypes
+     * @param excludeFieldTypes
+     * @return
+     */
+    public static Map<String,Object> buildFieldValueToMap(Object inputParams, Class<?>[] includeFieldTypes, Class<?>[] excludeFieldTypes) {
+        Map<String, Object> paramFieldMap = new HashMap<>();
+        Field fields[] = getClassFields(inputParams.getClass());
+        Field.setAccessible(fields,true);
+        for (Field field : fields){
+            try {
+                if (includeFieldTypes == null && excludeFieldTypes == null){
+                    paramFieldMap.put(field.getName(), field.get(inputParams));
+                    continue;
+                }
+                // 如果选择指定类型不为空，则筛选指定的属性封装成map
+                if (includeFieldTypes == null && !ArrayUtils.contains(excludeFieldTypes, field.getType())){
+                    paramFieldMap.put(field.getName(), field.get(inputParams));
+                } else if (excludeFieldTypes == null && ArrayUtils.contains(includeFieldTypes, field.getType())){
+                    paramFieldMap.put(field.getName(), field.get(inputParams));
+                }
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
+        return paramFieldMap;
+    }
+
+    /**
+     * 封装入参的除指定属性类型之外的属性为以属性名为key，值为value的map
+     * @param inputParams
+     * @param excludeFieldTypes
+     * @return
+     */
+    public static Map<String,Object> buildFieldValueToMap(Object inputParams, Class<?>[] excludeFieldTypes) {
+        return buildFieldValueToMap(inputParams, null, excludeFieldTypes);
+    }
+
+    /**
+     * 获取class的全部属性（不包括父类Object中的属性）
+     * @param classes
+     * @return
+     */
+    public static Field[] getClassFields(Class<?> classes){
+        Field fields[] = classes.getDeclaredFields();
+        if (!Object.class.equals(classes) && !classes.getSuperclass().equals(Object.class)){
+            fields = ArrayUtils.addAll(getClassFields(classes.getSuperclass()), fields);
+        }
+        return fields;
+    }
 }

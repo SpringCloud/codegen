@@ -5,8 +5,6 @@ import cn.springcloud.codegen.engine.entity.CodeOutType;
 import cn.springcloud.codegen.engine.entity.GeneratorMetadata;
 import cn.springcloud.codegen.engine.entity.InputParams;
 import cn.springcloud.codegen.engine.exception.CodeGenException;
-import cn.springcloud.codegen.engine.service.ClassService;
-import cn.springcloud.codegen.engine.service.OutFileService;
 import cn.springcloud.codegen.engine.service.TemplateConfigService;
 import cn.springcloud.codegen.engine.tools.FileTools;
 import cn.springcloud.codegen.engine.tools.GeneratorDataContext;
@@ -20,7 +18,6 @@ import org.slf4j.LoggerFactory;
 
 import java.io.*;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Created with IntelliJ IDEA.
@@ -29,14 +26,38 @@ import java.util.Objects;
  * @date: 2018/1/17
  * @time: 16:51
  * @description : 代码生成类，
- * 切换到不同的模式， 可以通过不同的提供者的形式，
- * FileProvider, DataBaseProvider
- * 等形式(注意 ： 生成应该用过多个线程跑)
  */
-public abstract class CodeGenEngineGenerator implements TemplateConfigService, OutFileService, ClassService {
+public abstract class CodeGenEngineGenerator implements TemplateConfigService {
 
     private final Logger LOGGER = LoggerFactory.getLogger(CodeGenEngineGenerator.class);
-    
+
+    /**
+     * 多级组件生成
+     * @param inputParams 外部输入值
+     * @param generatorMetadata 生成器元信息
+     * @param extendGenerators 多级组件数据
+     * @throws CodeGenException
+     * @throws IOException
+     * @throws TemplateException
+     */
+    public void genrator(InputParams inputParams, GeneratorMetadata generatorMetadata, List<CodeGenExtendGenerator> extendGenerators) throws CodeGenException, IOException, TemplateException {
+        GeneratorDataContext dataContext = new GeneratorDataContext(inputParams, generatorMetadata, extendGenerators);
+        genrator(dataContext);
+    }
+
+    /**
+     * 单组件生成
+     * @param inputParams 外部输入值
+     * @param generatorMetadata 生成器元信息
+     * @throws CodeGenException
+     * @throws IOException
+     * @throws TemplateException
+     */
+    public void genrator(InputParams inputParams, GeneratorMetadata generatorMetadata) throws CodeGenException, IOException, TemplateException {
+        GeneratorDataContext dataContext = new GeneratorDataContext(inputParams, generatorMetadata);
+        genrator(dataContext);
+    }
+
     /**
      * 代码生成
      *
@@ -44,8 +65,11 @@ public abstract class CodeGenEngineGenerator implements TemplateConfigService, O
      * @throws IOException
      * @throws TemplateException
      */
-    public void genrator() throws CodeGenException, IOException, TemplateException {
+    public void genrator(GeneratorDataContext dataContext) throws CodeGenException, IOException, TemplateException {
 
+        if (dataContext == null){
+            throw new IllegalArgumentException("generator data context can't be null");
+        }
         /**
          *   1. 需要模板所在的目录
          *   2. 需要生成的编码格式
@@ -54,26 +78,26 @@ public abstract class CodeGenEngineGenerator implements TemplateConfigService, O
          *   5. 需要一个输出路径
          */
         Configuration cfg = new Configuration(Configuration.VERSION_2_3_22);
-        cfg.setDirectoryForTemplateLoading(new File(getTemplateDir()));
-        cfg.setDefaultEncoding(getDefaultEncode());
+        cfg.setDirectoryForTemplateLoading(new File(getTemplateDir(dataContext)));
+        cfg.setDefaultEncoding(getDefaultEncode(dataContext));
         cfg.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
 
         /**
          * 获取模板数据
          */
-        Template template = cfg.getTemplate(getTemplateName());
+        Template template = cfg.getTemplate(dataContext.getString("templateName"));
 
 
         /**
          * 输出文件
          */
-        OutputStream fos = new FileOutputStream(getOutPutFile(FileTools.getOutPath(getOutPath(getDynamicOutPath()), getModuleName(), isJavaOrResourcesOrOtherCode().getKey(), getClassPackageName()), FileTools.getFinalFileName(getFileName(), getFileType())));
+        OutputStream fos = new FileOutputStream(getOutPutFile(FileTools.getOutPath(getOutPath(dataContext.getString("dynamicOutPath")), dataContext.getString("moduleName"), isJavaOrResourcesOrOtherCode(dataContext).getKey(), getClassPackageName(dataContext)), FileTools.getFinalFileName(dataContext.getString("fileName"), dataContext.getString("fileType"))));
         Writer out = new OutputStreamWriter(fos);
 
         /**
          * 生成文件, 模板需要的数据源和输出文件路径
          */
-        template.process(getData(), out);
+        template.process(getData(dataContext), out);
         out.flush();
         out.close();
         System.out.println("----------------------");
@@ -87,8 +111,8 @@ public abstract class CodeGenEngineGenerator implements TemplateConfigService, O
      *
      * @return
      */
-    private String getDefaultEncode() {
-        return (getTemplateConfigEncode() == null || "".equals(getTemplateConfigEncode())) ? CodeGenConstants.DEFAULT_ENCODE : getTemplateConfigEncode();
+    private String getDefaultEncode(GeneratorDataContext dataContext) {
+        return (dataContext.getString("templateConfigEncode") == null || "".equals(dataContext.getString("templateConfigEncode"))) ? CodeGenConstants.DEFAULT_ENCODE : dataContext.getString("templateConfigEncode");
     }
 
     /**
@@ -96,8 +120,8 @@ public abstract class CodeGenEngineGenerator implements TemplateConfigService, O
      *
      * @return
      */
-    private String getClassPackageName() {
-        return StringUtils.isNotBlank(getPackageName()) ? getPackageName() : getData().get("packageName") == null ? "" : String.valueOf(getData().get("packageName"));
+    private String getClassPackageName(GeneratorDataContext dataContext) {
+        return StringUtils.isNotBlank(dataContext.getString("packageName", false)) ? dataContext.getString("packageName") : getData(dataContext).get("packageName") == null ? "" : String.valueOf(getData(dataContext).get("packageName"));
     }
 
     /**
@@ -132,16 +156,9 @@ public abstract class CodeGenEngineGenerator implements TemplateConfigService, O
 
 
     /**
-     * 设置编码的模型, 可以有一个默认值
-     *
-     * @return
-     */
-    public abstract String getTemplateConfigEncode();
-
-    /**
      * 根据类型添加， 额外的目录结构
      * @return
      */
-    public abstract CodeOutType isJavaOrResourcesOrOtherCode();
+    public abstract CodeOutType isJavaOrResourcesOrOtherCode(GeneratorDataContext dataContext);
 
 }

@@ -1,5 +1,7 @@
 package cn.springcloud.codegen.engine.service;
 
+import cn.springcloud.codegen.engine.tools.GeneratorDataContext;
+
 import java.util.Map;
 
 /**
@@ -12,9 +14,7 @@ import java.util.Map;
  */
 public interface TemplateConfigService {
 
-    String getTemplateDir();
+    String getTemplateDir(GeneratorDataContext dataContext);
 
-    String getTemplateName();
-
-    Map<String, Object> getData();
+    Map<String, Object> getData(GeneratorDataContext dataContext);
 }

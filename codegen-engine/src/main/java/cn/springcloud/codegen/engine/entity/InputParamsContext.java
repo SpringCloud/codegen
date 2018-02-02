@@ -19,7 +19,7 @@ public class InputParamsContext extends BaseInputParams implements Serializable{
 
     public InputParamsContext(String templateName,String fileName, String fileType, String dynamicOutPath, String moduleName,
                               String prefixTemplatePath, String reducedTemplatePath, Class<?> currentClasses, String packageName) {
-        super(templateName, fileName, fileType, dynamicOutPath, moduleName, packageName);
+        super(dynamicOutPath);
         this.prefixTemplatePath = prefixTemplatePath;
         this.reducedTemplatePath = reducedTemplatePath;
         this.currentClasses = currentClasses;
