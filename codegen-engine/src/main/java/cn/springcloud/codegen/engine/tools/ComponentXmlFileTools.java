@@ -102,4 +102,35 @@ public class ComponentXmlFileTools {
 
         return  null;
     }
+
+    /**
+     * 返回读取到的对象信息
+     * @param in 文件流
+     * @return
+     */
+    public static ComponentMetadata readXmlFile(InputStream in){
+
+        try {
+
+            SAXReader reader = new SAXReader();
+            Document document = reader.read(in);
+            Element root = document.getRootElement();
+
+            return parseToMetadata(root);
+        } catch (DocumentException e) {
+            e.printStackTrace();
+        } finally {
+
+            if(in != null){
+                try {
+                    in.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        return  null;
+    }
+
 }

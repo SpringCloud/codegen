@@ -78,7 +78,7 @@ public abstract class CodeGenEngineGenerator implements TemplateConfigService {
          *   5. 需要一个输出路径
          */
         Configuration cfg = new Configuration(Configuration.VERSION_2_3_22);
-        cfg.setDirectoryForTemplateLoading(new File(getTemplateDir(dataContext)));
+        cfg.setClassForTemplateLoading(CodeGenEngineGenerator.class, getTemplateDir(dataContext));
         cfg.setDefaultEncoding(getDefaultEncode(dataContext));
         cfg.setTemplateExceptionHandler(TemplateExceptionHandler.RETHROW_HANDLER);
 

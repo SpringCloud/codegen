@@ -3,6 +3,7 @@ package cn.springcloud.codegen.engine;
 import cn.springcloud.codegen.engine.entity.ComponentMetadata;
 import cn.springcloud.codegen.engine.entity.GeneratorMetadata;
 import cn.springcloud.codegen.engine.entity.InputParams;
+import cn.springcloud.codegen.engine.generator.CodeGenEngineGenerator;
 import cn.springcloud.codegen.engine.generator.CodeGenForFileGenerator;
 import cn.springcloud.codegen.engine.tools.ComponentXmlFileTools;
 import freemarker.template.TemplateException;
@@ -18,7 +19,7 @@ import java.util.Map;
  */
 public class EurekaCodeGenTest {
 
-    private static final CodeGenForFileGenerator generator = new CodeGenForFileGenerator();
+    private static final CodeGenEngineGenerator generator = CodeGenForFileGenerator.getInsatance();
 
     public static void main(String[] args) throws IOException, TemplateException {
         Map<String, List<GeneratorMetadata>> componentGeneratorData = loadComponentGeneratorData();

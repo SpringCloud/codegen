@@ -22,6 +22,9 @@ import java.util.*;
  */
 public class CodeGenForFileGenerator extends CodeGenEngineGenerator {
 
+    private CodeGenForFileGenerator(){
+
+    }
     /**
      * 多级组件生成
      * @param inputParams 外部输入值
@@ -43,12 +46,20 @@ public class CodeGenForFileGenerator extends CodeGenEngineGenerator {
 
     @Override
     public String getTemplateDir(GeneratorDataContext dataContext) {
-        return ClassTools.getAbsolutePathOfClassLoaderClassPath(CodeGenForFileGenerator.class) + File.separator +dataContext.getString("templateDir");
+        return File.separator +dataContext.getString("templateDir");
     }
 
     @Override
     public Map<String, Object> getData(GeneratorDataContext dataContext) {
         return dataContext.getTemplateVariableData();
+    }
+
+    private static class SingletonHolder{
+        private static final CodeGenEngineGenerator instance = new CodeGenForFileGenerator();
+    }
+
+    public static CodeGenEngineGenerator getInsatance(){
+        return SingletonHolder.instance;
     }
 
 }
