@@ -40,6 +40,7 @@
         <module>codegen-service</module>
         <module>codegen-component-eureka</module>
         <module>codegen-component-zipkin</module>
+        <module>codegen-component-spring-boot-springmvc</module>
     </modules>
 
     <properties>
@@ -81,7 +82,11 @@
                 <artifactId>codegen-component-zipkin</artifactId>
                 <version>${project.version}</version>
             </dependency>
-
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>codegen-component-spring-boot-springmvc</artifactId>
+                <version>${project.version}</version>
+            </dependency>
             <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-starter-web</artifactId>
