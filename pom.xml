@@ -39,6 +39,7 @@
         <module>codegen-docs</module>
         <module>codegen-service</module>
         <module>codegen-component-eureka</module>
+        <module>codegen-component-zipkin</module>
     </modules>
 
     <properties>
@@ -72,6 +73,12 @@
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>codegen-component-eureka</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>codegen-component-zipkin</artifactId>
                 <version>${project.version}</version>
             </dependency>
 

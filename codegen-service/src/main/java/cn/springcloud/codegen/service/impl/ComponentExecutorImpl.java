@@ -1,6 +1,6 @@
 package cn.springcloud.codegen.service.impl;
 
-import cn.springcloud.codegen.core.ComponentLoader;
+import cn.springcloud.codegen.support.ComponentLoader;
 import cn.springcloud.codegen.engine.entity.GeneratorMetadata;
 import cn.springcloud.codegen.engine.entity.InputParams;
 import cn.springcloud.codegen.engine.generator.CodeGenEngineGenerator;

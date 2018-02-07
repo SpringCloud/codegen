@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<component id="eureka">
+<component id="zipkin">
     <generator>
         <templateData>
-            <templateName>EurekaApplication.java.ftl</templateName>
-            <templateDir>templates/eureka/java/</templateDir>
+            <templateName>ZipkinApplication.java.ftl</templateName>
+            <templateDir>templates/zipkin/java/</templateDir>
             <templateConfigEncode>UTF-8</templateConfigEncode>
         </templateData>
         <variableData>
-            <templateVariable key="packageName" value="${basePackage}.eureka"/>
+            <templateVariable key="packageName" value="${basePackage}.zipkin"/>
         </variableData>
         <fileData>
-            <packageName>${basePackage}.eureka</packageName>
+            <packageName>${basePackage}.zipkin</packageName>
             <fileType>java</fileType>
-            <fileName>EurekaApplication</fileName>
+            <fileName>ZipkinApplication</fileName>
             <isJavaOrResourcesOrOtherCode>CodeOutType.JAVA</isJavaOrResourcesOrOtherCode>
         </fileData>
     </generator>
     <generator>
         <templateData>
             <templateName>application.properties.ftl</templateName>
-            <templateDir>templates/eureka/resources/</templateDir>
+            <templateDir>templates/zipkin/resources/</templateDir>
             <templateConfigEncode>UTF-8</templateConfigEncode>
         </templateData>
         <variableData>
@@ -34,7 +34,7 @@
     <generator>
         <templateData>
             <templateName>pom.xml.ftl</templateName>
-            <templateDir>templates/eureka/</templateDir>
+            <templateDir>templates/zipkin/</templateDir>
             <templateConfigEncode>UTF-8</templateConfigEncode>
         </templateData>
         <variableData>

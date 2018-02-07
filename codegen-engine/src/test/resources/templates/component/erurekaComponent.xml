@@ -28,7 +28,7 @@
 		<fileData>
 			<fileType>properties</fileType>
 			<fileName>application</fileName>
-			<isJavaOrResourcesOrOtherCode>CodeOutType.JAVA</isJavaOrResourcesOrOtherCode>
+			<isJavaOrResourcesOrOtherCode>CodeOutType.RESOURCES</isJavaOrResourcesOrOtherCode>
 		</fileData>
 	</generator>
 	<generator>

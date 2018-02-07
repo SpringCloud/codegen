@@ -1,4 +1,4 @@
-package cn.springcloud.codegen.core;
+package cn.springcloud.codegen.support;
 
 import cn.springcloud.codegen.engine.entity.ComponentMetadata;
 import cn.springcloud.codegen.engine.entity.GeneratorMetadata;
@@ -10,8 +10,12 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ClassUtils;
 
 import java.io.InputStream;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -33,13 +37,13 @@ public class ComponentLoader implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
         try {
             // 获取所有匹配的文件
-            Resource[] resources = resolver.getResources("componentConfig.xml");
-            for(Resource resource : resources) {
-                InputStream stream = resource.getInputStream();
-                ComponentMetadata componentMetadata = ComponentXmlFileTools.readXmlFile(stream);
+            Enumeration<URL> urls = ClassLoader.getSystemResources("componentConfig.xml");
+            while (urls.hasMoreElements()) {
+                URL url = urls.nextElement();
+                URLConnection con = url.openConnection();
+                ComponentMetadata componentMetadata = ComponentXmlFileTools.readXmlFile(con.getInputStream());
                 if (componentMetadata == null || componentMetadata.getComponentId() == null){
                     throw new IllegalArgumentException("component xml load has error, please check componentConfig.xml");
                 }
