@@ -29,6 +29,8 @@ public class ComponentLoader implements InitializingBean {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
 
+    private static final String DEFAULT_COMPONENT_CONFIG_LOCATION = "componentConfig.xml";
+
     private Map<String, List<GeneratorMetadata>> componentGeneratorData = new HashMap<>();
 
     public Map<String, List<GeneratorMetadata>> getComponentGeneratorMap(){
@@ -39,7 +41,7 @@ public class ComponentLoader implements InitializingBean {
     public void afterPropertiesSet() throws Exception {
         try {
             // 获取所有匹配的文件
-            Enumeration<URL> urls = ClassLoader.getSystemResources("componentConfig.xml");
+            Enumeration<URL> urls = ClassLoader.getSystemResources(DEFAULT_COMPONENT_CONFIG_LOCATION);
             while (urls.hasMoreElements()) {
                 URL url = urls.nextElement();
                 URLConnection con = url.openConnection();
