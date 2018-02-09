@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component id="eureka">
+    <generator>
+        <templateData>
+            <templateName>ConfigApplication.java.ftl</templateName>
+            <templateDir>templates/config/java/</templateDir>
+            <templateConfigEncode>UTF-8</templateConfigEncode>
+        </templateData>
+        <variableData>
+            <templateVariable key="packageName" value="${basePackage}.config"/>
+        </variableData>
+        <fileData>
+            <packageName>${basePackage}.config</packageName>
+            <fileType>java</fileType>
+            <fileName>ConfigApplication</fileName>
+            <isJavaOrResourcesOrOtherCode>CodeOutType.JAVA</isJavaOrResourcesOrOtherCode>
+        </fileData>
+    </generator>
+    <generator>
+        <templateData>
+            <templateName>application.properties.ftl</templateName>
+            <templateDir>templates/config/resources/</templateDir>
+            <templateConfigEncode>UTF-8</templateConfigEncode>
+        </templateData>
+        <variableData>
+            <templateVariable key="serviceName" value="${moduleName}"/>
+        </variableData>
+        <fileData>
+            <fileType>properties</fileType>
+            <fileName>application</fileName>
+            <isJavaOrResourcesOrOtherCode>CodeOutType.RESOURCES</isJavaOrResourcesOrOtherCode>
+        </fileData>
+    </generator>
+    <generator>
+        <templateData>
+            <templateName>pom.xml.ftl</templateName>
+            <templateDir>templates/config/</templateDir>
+            <templateConfigEncode>UTF-8</templateConfigEncode>
+        </templateData>
+        <variableData>
+            <templateVariable key="pomArtifactId" value="${pomArtifactId}"/>
+            <templateVariable key="pomName" value="${pomName}"/>
+            <templateVariable key="springBootVersion" value="${springBootVersion}"/>
+            <templateVariable key="javaVersion" value="${javaVersion}"/>
+        </variableData>
+        <fileData>
+            <fileType>xml</fileType>
+            <fileName>pom</fileName>
+            <isJavaOrResourcesOrOtherCode>CodeOutType.NONE</isJavaOrResourcesOrOtherCode>
+        </fileData>
+    </generator>
+</component>

@@ -41,6 +41,7 @@
         <module>codegen-component-eureka</module>
         <module>codegen-component-zipkin</module>
         <module>codegen-component-spring-boot-springmvc</module>
+        <module>codegen-component-config</module>
     </modules>
 
     <properties>
