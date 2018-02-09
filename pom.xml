@@ -42,6 +42,7 @@
         <module>codegen-component-zipkin</module>
         <module>codegen-component-spring-boot-springmvc</module>
         <module>codegen-component-config</module>
+        <module>codegen-component-zuul</module>
     </modules>
 
     <properties>
