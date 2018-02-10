@@ -40,6 +40,12 @@
 			<groupId>${project.groupId}</groupId>
 			<artifactId>codegen-component-spring-boot-springmvc</artifactId>
 		</dependency>
+
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+		</dependency>
+
 	</dependencies>
 
 
