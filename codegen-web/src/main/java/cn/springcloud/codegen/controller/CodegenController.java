@@ -1,4 +1,4 @@
-package cn.springcloud.codegen.rest;
+package cn.springcloud.codegen.controller;
 
 import cn.springcloud.codegen.engine.entity.InputParams;
 import cn.springcloud.codegen.service.ComponentExecutor;
@@ -16,7 +16,7 @@ import java.io.IOException;
  * @createdOn 2018/02/06 00:18
  */
 @RestController
-public class DemoController {
+public class CodegenController {
 
     @Autowired
     private ComponentExecutor componentExecutor;
