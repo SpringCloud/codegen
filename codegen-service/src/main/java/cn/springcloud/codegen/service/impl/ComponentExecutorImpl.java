@@ -1,5 +1,6 @@
 package cn.springcloud.codegen.service.impl;
 
+import cn.springcloud.codegen.config.GeneratorMetadataSelector;
 import cn.springcloud.codegen.support.ComponentLoader;
 import cn.springcloud.codegen.engine.entity.GeneratorMetadata;
 import cn.springcloud.codegen.engine.entity.InputParams;
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -21,16 +23,24 @@ import java.util.List;
 public class ComponentExecutorImpl implements ComponentExecutor {
 
     @Autowired
-    private ComponentLoader componentLoader;
+    private List<GeneratorMetadataSelector> selectors;
 
     public void generate(InputParams inputParams) throws IOException, TemplateException {
-        List<GeneratorMetadata> generatorMetadata = componentLoader.getComponentGeneratorMap().get(inputParams.getParamMap().get("sc-alone-radio"));
-        if (generatorMetadata == null || generatorMetadata.size() == 0){
-            throw new IllegalArgumentException("not found [" + inputParams.getParamMap().get("sc-alone-radio") + "] component generator");
-        }
-        for (GeneratorMetadata metadata : generatorMetadata){
-            CodeGenEngineGenerator codeGenEngineGenerator = CodeGenForFileGenerator.getInsatance();
+        List<GeneratorMetadata> allGeneratorMetadata = loadAllGeneratorMetaData(inputParams);
+        CodeGenEngineGenerator codeGenEngineGenerator = CodeGenForFileGenerator.getInsatance();
+        for (GeneratorMetadata metadata : allGeneratorMetadata){
             codeGenEngineGenerator.genrator(inputParams, metadata);
         }
+    }
+
+    private List<GeneratorMetadata> loadAllGeneratorMetaData(InputParams inputParams) {
+        List<GeneratorMetadata> allGeneratorMetadata = new ArrayList<>();
+        for (GeneratorMetadataSelector selector : selectors){
+            List<GeneratorMetadata> generatorMetadata = selector.selectGeneratorMetadata(inputParams);
+            if (generatorMetadata != null){
+                allGeneratorMetadata.addAll(generatorMetadata);
+            }
+        }
+        return allGeneratorMetadata;
     }
 }

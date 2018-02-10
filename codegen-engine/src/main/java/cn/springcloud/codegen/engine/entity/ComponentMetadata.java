@@ -14,6 +14,8 @@ public class ComponentMetadata {
      */
     private String componentId;
 
+    private String componentType;
+
     /**
      * 生成器数据
      */
@@ -33,5 +35,13 @@ public class ComponentMetadata {
 
     public void setGeneratorData(List<GeneratorMetadata> generatorData) {
         this.generatorData = generatorData;
+    }
+
+    public String getComponentType() {
+        return componentType;
+    }
+
+    public void setComponentType(String componentType) {
+        this.componentType = componentType;
     }
 }

@@ -15,10 +15,7 @@ import org.springframework.util.ClassUtils;
 import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author Vincent.
@@ -33,10 +30,15 @@ public class ComponentLoader implements InitializingBean {
 
     private Map<String, List<GeneratorMetadata>> componentGeneratorData = new HashMap<>();
 
+    private Map<String, List<GeneratorMetadata>> typeGroupGeneratorData = new HashMap<>();
+
     public Map<String, List<GeneratorMetadata>> getComponentGeneratorMap(){
         return componentGeneratorData;
     }
 
+    public Map<String, List<GeneratorMetadata>> getlComponentGeneratorMapByType(){
+        return typeGroupGeneratorData;
+    }
     @Override
     public void afterPropertiesSet() throws Exception {
         try {
@@ -50,10 +52,22 @@ public class ComponentLoader implements InitializingBean {
                     throw new IllegalArgumentException("component xml load has error, please check componentConfig.xml");
                 }
                 componentGeneratorData.put(componentMetadata.getComponentId(), componentMetadata.getGeneratorData());
+                addGeneratorDataByType(componentMetadata);
             }
         }catch (Exception ex){
             logger.error(ex.getMessage(), ex);
             throw ex;
+        }
+    }
+
+    private void addGeneratorDataByType(ComponentMetadata componentMetadata){
+        List<GeneratorMetadata> generatorMetadata = typeGroupGeneratorData.get(componentMetadata.getComponentType());
+        if (generatorMetadata == null){
+            typeGroupGeneratorData.put(componentMetadata.getComponentType(), componentMetadata.getGeneratorData());
+        }else {
+            List<GeneratorMetadata> newGeneratorMetadata = new ArrayList<>(generatorMetadata);
+            newGeneratorMetadata.addAll(componentMetadata.getGeneratorData());
+            typeGroupGeneratorData.put(componentMetadata.getComponentType(), newGeneratorMetadata);
         }
     }
 }

@@ -4,6 +4,7 @@ import cn.springcloud.codegen.engine.entity.ComponentMetadata;
 import cn.springcloud.codegen.engine.entity.ConfigParams;
 import cn.springcloud.codegen.engine.entity.GeneratorMetadata;
 import com.alibaba.fastjson.JSONArray;
+import org.apache.commons.lang3.StringUtils;
 import org.dom4j.Attribute;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
@@ -20,17 +21,18 @@ import java.util.*;
  */
 public class ComponentXmlFileTools {
 
-
     /**
-     *   默认是一list的方式执行， 设置为false是map 的形式
+     * 默认type类型
      */
-    private final static boolean DEFAULT_EXCUTE_FLAG = false;
+    private static final String DEFAULT_TYPE_VALUE = "DEFAULT";
 
     public static ComponentMetadata parseToMetadata(Element root) {
         ComponentMetadata componentMetadata = new ComponentMetadata();
         Attribute attribute = root.attribute("id");
-        componentMetadata.setComponentId(attribute == null ?  "" : attribute.getValue());
-        List<GeneratorMetadata> generatorMetadataList = new ArrayList<GeneratorMetadata>();
+        componentMetadata.setComponentId(attribute == null ? "" : attribute.getValue());
+        String type = getComponentType(root);
+        componentMetadata.setComponentType(type);
+        List<GeneratorMetadata> generatorMetadataList = new ArrayList<>();
         List<?> elements = root.elements();
         if (elements.size() != 0) {
             // 有子元素
@@ -48,6 +50,15 @@ public class ComponentXmlFileTools {
         }
         componentMetadata.setGeneratorData(generatorMetadataList);
         return componentMetadata;
+    }
+
+    private static String getComponentType(Element root) {
+        Attribute attribute = root.attribute("type");
+        if (attribute == null || StringUtils.isBlank(attribute.getValue())){
+            return DEFAULT_TYPE_VALUE;
+        }else {
+            return attribute.getValue();
+        }
     }
 
     public static Object parseElement(Element element) {

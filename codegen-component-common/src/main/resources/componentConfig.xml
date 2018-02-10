@@ -27,7 +27,7 @@
     <generator>
         <templateData>
             <templateName>logback.xml.ftl</templateName>
-            <templateDir>templates/logback/</templateDir>
+            <templateDir>templates/common/</templateDir>
             <templateConfigEncode>UTF-8</templateConfigEncode>
         </templateData>
         <variableData>
