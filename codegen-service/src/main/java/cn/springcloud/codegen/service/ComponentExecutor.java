@@ -11,5 +11,5 @@ import java.io.IOException;
  */
 public interface ComponentExecutor {
 
-    void generate(InputParams inputParams) throws IOException, TemplateException;
+    public byte[]  generate(InputParams inputParams);
 }

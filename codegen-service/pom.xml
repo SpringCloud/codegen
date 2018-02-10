@@ -45,6 +45,12 @@
 			<groupId>${project.groupId}</groupId>
 			<artifactId>codegen-component-common</artifactId>
 		</dependency>
+
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+		</dependency>
+
 	</dependencies>
 
 
