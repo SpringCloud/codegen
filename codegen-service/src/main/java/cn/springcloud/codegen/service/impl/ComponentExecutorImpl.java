@@ -1,6 +1,8 @@
 package cn.springcloud.codegen.service.impl;
 
 import cn.springcloud.codegen.config.GeneratorMetadataSelector;
+import cn.springcloud.codegen.exception.CodeGenException;
+import cn.springcloud.codegen.support.ComponentLoader;
 import cn.springcloud.codegen.engine.entity.GeneratorMetadata;
 import cn.springcloud.codegen.engine.entity.InputParams;
 import cn.springcloud.codegen.engine.generator.CodeGenEngineGenerator;
@@ -10,11 +12,13 @@ import cn.springcloud.codegen.service.ComponentExecutor;
 import cn.springcloud.codegen.utils.CodeGenUtil;
 import cn.springcloud.codegen.utils.FileUtil;
 import cn.springcloud.codegen.utils.ZipUtil;
+import freemarker.template.TemplateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.io.IOException;
 import java.util.List;
 
 /**
