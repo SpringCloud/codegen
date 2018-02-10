@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component id= "FileCommon" type= "common">
+    <generator>
+        <templateData>
+            <templateName>file.gitattributes.ftl</templateName>
+            <templateDir>templates/common/</templateDir>
+            <templateConfigEncode>UTF-8</templateConfigEncode>
+        </templateData>
+        <fileData>
+            <fileType>gitattributes</fileType>
+            <fileName>file</fileName>
+            <isJavaOrResourcesOrOtherCode>CodeOutType.RESOURCES</isJavaOrResourcesOrOtherCode>
+        </fileData>
+    </generator>
+    <generator>
+        <templateData>
+            <templateName>file.gitignore.ftl</templateName>
+            <templateDir>templates/common/</templateDir>
+            <templateConfigEncode>UTF-8</templateConfigEncode>
+        </templateData>
+        <fileData>
+            <fileType>gitignore</fileType>
+            <fileName>file</fileName>
+            <isJavaOrResourcesOrOtherCode>CodeOutType.RESOURCES</isJavaOrResourcesOrOtherCode>
+        </fileData>
+    </generator>
+    <generator>
+        <templateData>
+            <templateName>logback.xml.ftl</templateName>
+            <templateDir>templates/logback/</templateDir>
+            <templateConfigEncode>UTF-8</templateConfigEncode>
+        </templateData>
+        <variableData>
+            <templateVariable key="serviceName" value="${moduleName}"/>
+        </variableData>
+        <fileData>
+            <fileType>xml</fileType>
+            <fileName>logback</fileName>
+            <isJavaOrResourcesOrOtherCode>CodeOutType.RESOURCES</isJavaOrResourcesOrOtherCode>
+        </fileData>
+    </generator>
+</component>

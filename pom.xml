@@ -43,6 +43,7 @@
         <module>codegen-component-spring-boot-springmvc</module>
         <module>codegen-component-config</module>
         <module>codegen-component-zuul</module>
+        <module>codegen-component-common</module>
     </modules>
 
     <properties>
@@ -87,6 +88,11 @@
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>codegen-component-spring-boot-springmvc</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>codegen-component-common</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
