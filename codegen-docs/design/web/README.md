@@ -20,7 +20,7 @@
  #### 请求内容说明
  * `paramMap` 创建工程所需参数集合（不对应工程参数）
  * `pomArtifactId` maven artifactId
- * `moduleName` 生成工程名
+ * `moduleName` 生成工程名（服务名）
  * `pomName` maven name
  * `springBootVersion` Spring Boot版本，不带后缀 （现在可选1.4.7， 1.5.9， 2.0.0）
  * `javaVersion`  java版本 （可选1.6, 1.7， 1.8）
