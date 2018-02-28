@@ -38,6 +38,16 @@
 
 		<dependency>
 			<groupId>${project.groupId}</groupId>
+			<artifactId>codegen-component-zuul</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>codegen-component-config</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>${project.groupId}</groupId>
 			<artifactId>codegen-component-spring-boot-springmvc</artifactId>
 		</dependency>
 
