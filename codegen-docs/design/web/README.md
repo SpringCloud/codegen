@@ -25,5 +25,5 @@
  * `springBootVersion` Spring Boot版本，不带后缀 （现在可选1.4.7， 1.5.9， 2.0.0）
  * `javaVersion`  java版本 （可选1.6, 1.7， 1.8）
  * `basePackage` 上层包路径
- * `sc-alone-radio` 独立组件（Eureka Server：eureka-server， Zuul Server：zuul-server， Config Server：config-server， Zipkin Server:zipkin-server）
+ * `sc-alone-radio` 独立组件（[组件名：`sc-alone-radio` 的value值]，Eureka Server：eureka-server， Zuul Server：zuul-server， Config Server：config-server， Zipkin Server：zipkin-server）
  
