@@ -10,7 +10,7 @@ package cn.springcloud.codegen.utils;
  * @version 1.0
  */
 
-import com.nepxion.skeleton.engine.constant.SkeletonConstant;
+//import com.nepxion.skeleton.engine.constant.SkeletonConstant;
 import net.lingala.zip4j.core.ZipFile;
 import net.lingala.zip4j.exception.ZipException;
 import net.lingala.zip4j.model.FileHeader;
@@ -27,6 +27,9 @@ import java.util.List;
  * 基于Zip4J开源项目(http://www.lingala.net/zip4j/)制作，支持压缩和解压，支持加解密
  */
 public class ZipUtil {
+
+    static String FILE_ZIP          = "zip";
+    static String ENCODING_UTF_8    = "utf-8";
     /**
      * 使用给定密码解压指定的ZIP压缩文件到当前目录
      * @param zipFilePath 指定的ZIP压缩文件
@@ -66,7 +69,7 @@ public class ZipUtil {
     @SuppressWarnings("unchecked")
     public static File[] unzip(File zipFile, String destPath, String password) throws ZipException {
         ZipFile zFile = new ZipFile(zipFile);
-        zFile.setFileNameCharset(SkeletonConstant.ENCODING_UTF_8);
+        zFile.setFileNameCharset(ZipUtil.ENCODING_UTF_8);
         if (!zFile.isValidZipFile()) {
             throw new ZipException("Invalid zip files, it may be damaged");
         }
@@ -136,17 +139,17 @@ public class ZipUtil {
         File srcFile = new File(srcPath);
         destPath = buildDestinationZipFilePath(srcFile, destPath);
         ZipParameters parameters = new ZipParameters();
-        parameters.setCompressionMethod(Zip4jConstants.COMP_DEFLATE); // 压缩方式  
-        parameters.setCompressionLevel(Zip4jConstants.DEFLATE_LEVEL_NORMAL); // 压缩级别  
+        parameters.setCompressionMethod(Zip4jConstants.COMP_DEFLATE); // 压缩方式
+        parameters.setCompressionLevel(Zip4jConstants.DEFLATE_LEVEL_NORMAL); // 压缩级别
         if (StringUtils.isNotEmpty(password)) {
             parameters.setEncryptFiles(true);
-            parameters.setEncryptionMethod(Zip4jConstants.ENC_METHOD_STANDARD); // 加密方式  
+            parameters.setEncryptionMethod(Zip4jConstants.ENC_METHOD_STANDARD); // 加密方式
             parameters.setPassword(password.toCharArray());
         }
 
         ZipFile zipFile = new ZipFile(destPath);
         if (srcFile.isDirectory()) {
-            // 如果不创建目录的话，将直接把给定目录下的文件压缩到压缩文件，即没有目录结构  
+            // 如果不创建目录的话，将直接把给定目录下的文件压缩到压缩文件，即没有目录结构
             if (!isCreateDir) {
                 File[] subFiles = srcFile.listFiles();
                 ArrayList<File> subFileList = new ArrayList<File>();
@@ -172,13 +175,13 @@ public class ZipUtil {
     private static String buildDestinationZipFilePath(File srcFile, String destPath) {
         if (StringUtils.isEmpty(destPath)) {
             if (srcFile.isDirectory()) {
-                destPath = srcFile.getParent() + File.separator + srcFile.getName() + "." + SkeletonConstant.FILE_ZIP;
+                destPath = srcFile.getParent() + File.separator + srcFile.getName() + "." + ZipUtil.FILE_ZIP;
             } else {
                 String fileName = srcFile.getName().substring(0, srcFile.getName().lastIndexOf("."));
-                destPath = srcFile.getParent() + File.separator + fileName + "." + SkeletonConstant.FILE_ZIP;
+                destPath = srcFile.getParent() + File.separator + fileName + "." + ZipUtil.FILE_ZIP;
             }
         } else {
-            createDestDirectoryIfNecessary(destPath); // 在指定路径不存在的情况下将其创建出来  
+            createDestDirectoryIfNecessary(destPath); // 在指定路径不存在的情况下将其创建出来
             if (destPath.endsWith(File.separator)) {
                 String fileName = "";
                 if (srcFile.isDirectory()) {
@@ -186,7 +189,7 @@ public class ZipUtil {
                 } else {
                     fileName = srcFile.getName().substring(0, srcFile.getName().lastIndexOf("."));
                 }
-                destPath += fileName + "." + SkeletonConstant.FILE_ZIP;
+                destPath += fileName + "." + ZipUtil.FILE_ZIP;
             }
         }
 
