@@ -122,12 +122,21 @@ public class ClassTools {
 
     /**
      * 封装入参的除指定属性类型之外的属性为以属性名为key，值为value的map
-     * @param inputParams
-     * @param excludeFieldTypes
+     * @param inputParams 待转换参数
+     * @param excludeFieldTypes 排除转换的属性类型
      * @return
      */
     public static Map<String,Object> buildFieldValueToMap(Object inputParams, Class<?>[] excludeFieldTypes) {
         return buildFieldValueToMap(inputParams, null, excludeFieldTypes);
+    }
+
+    /**
+     * 封装入参的除指定属性类型之外的属性为以属性名为key，值为value的map
+     * @param inputParams 待转换参数
+     * @return
+     */
+    public static Map<String,Object> buildFieldValueToMap(Object inputParams) {
+        return buildFieldValueToMap(inputParams, null, null);
     }
 
     /**

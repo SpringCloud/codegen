@@ -4,6 +4,7 @@ import cn.springcloud.codegen.engine.entity.InputParams;
 import freemarker.template.TemplateException;
 
 import java.io.IOException;
+import java.util.Map;
 
 /**
  * @author Vincent.
@@ -11,5 +12,5 @@ import java.io.IOException;
  */
 public interface ComponentExecutor {
 
-    public byte[]  generate(InputParams inputParams);
+    byte[] generate(InputParams inputParams);
 }

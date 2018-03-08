@@ -9,7 +9,7 @@
         <fileData>
             <fileType>gitattributes</fileType>
             <fileName>file</fileName>
-            <isJavaOrResourcesOrOtherCode>CodeOutType.RESOURCES</isJavaOrResourcesOrOtherCode>
+            <isJavaOrResourcesOrOtherCode>CodeOutType.NONE</isJavaOrResourcesOrOtherCode>
         </fileData>
     </generator>
     <generator>
@@ -21,7 +21,7 @@
         <fileData>
             <fileType>gitignore</fileType>
             <fileName>file</fileName>
-            <isJavaOrResourcesOrOtherCode>CodeOutType.RESOURCES</isJavaOrResourcesOrOtherCode>
+            <isJavaOrResourcesOrOtherCode>CodeOutType.NONE</isJavaOrResourcesOrOtherCode>
         </fileData>
     </generator>
     <generator>
