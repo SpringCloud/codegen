@@ -31,7 +31,7 @@ public class CodeGenTransport {
         String canonicalFileName = downloadConfig.getModuleName();
 
         InputParams inputParams = new InputParams();
-        inputParams.setParamMap(changeMapValueToString(ClassTools.buildFieldValueToMap(downloadConfig)));
+        inputParams.setParamMap(ClassTools.buildFieldValueToMap(downloadConfig));
         byte[] bytes = componentExecutor.generate(inputParams);
 
         HttpHeaders headers = new HttpHeaders();
@@ -48,9 +48,9 @@ public class CodeGenTransport {
         return ResponseEntity.ok().headers(headers).contentType(MediaType.parseMediaType("application/x-msdownload")).body(resource);
     }
 
-    private Map<String,String> changeMapValueToString(Map<String, Object> downloadConfigMap) {
-        Map<String, String> paramMap = new HashMap<>();
-        downloadConfigMap.forEach((k,v)-> paramMap.put(k, String.valueOf(v)));
-        return paramMap;
-    }
+//    private Map<String,String> changeMapValueToString(Map<String, Object> downloadConfigMap) {
+//        Map<String, String> paramMap = new HashMap<>();
+//        downloadConfigMap.forEach((k,v)-> paramMap.put(k, String.valueOf(v)));
+//        return paramMap;
+//    }
 }

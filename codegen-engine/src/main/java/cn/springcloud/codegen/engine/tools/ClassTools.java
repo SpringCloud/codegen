@@ -1,6 +1,6 @@
-
 package cn.springcloud.codegen.engine.tools;
 
+import cn.springcloud.codegen.engine.entity.MapFieldModel;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -103,6 +103,11 @@ public class ClassTools {
         Field.setAccessible(fields,true);
         for (Field field : fields){
             try {
+                if (MapFieldModel.class.isAssignableFrom(field.getType())){
+                    Map<String, Object> componentMap = buildFieldValueToMap(field.get(inputParams), includeFieldTypes, excludeFieldTypes);
+                    paramFieldMap.putAll(componentMap);
+                    continue;
+                }
                 if (includeFieldTypes == null && excludeFieldTypes == null){
                     paramFieldMap.put(field.getName(), field.get(inputParams));
                     continue;

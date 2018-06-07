@@ -22,9 +22,9 @@ public class BaseProjectSelector implements GeneratorMetadataSelector {
 
     @Override
     public List<GeneratorMetadata> selectGeneratorMetadata(InputParams inputParams) {
-        List<GeneratorMetadata> generatorMetadata = componentLoader.getComponentGeneratorMap().get(inputParams.getParamMap().get("scAloneRadio"));
+        List<GeneratorMetadata> generatorMetadata = componentLoader.getComponentGeneratorMap().get(inputParams.getParamMap().get("appType"));
         if (generatorMetadata == null || generatorMetadata.size() == 0){
-            throw new IllegalArgumentException("not found [" + inputParams.getParamMap().get("scAloneRadio") + "] component generator");
+            throw new IllegalArgumentException("not found [" + inputParams.getParamMap().get("appType") + "] component generator");
         }
         return generatorMetadata;
     }

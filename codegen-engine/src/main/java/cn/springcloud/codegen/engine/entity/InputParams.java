@@ -17,9 +17,9 @@ import java.util.Map;
 public class InputParams extends BaseInputParams implements Serializable{
 
     private static final long serialVersionUID = -1377887339408890399L;
-    private Map<String, String> paramMap = new HashMap<>();
+    private Map<String, Object> paramMap = new HashMap<>();
 
-    public InputParams(String dynamicOutPath, Map<String, String> paramMap) {
+    public InputParams(String dynamicOutPath, Map<String, Object> paramMap) {
 
         // 父类的构造方法
         super(dynamicOutPath);
@@ -30,17 +30,18 @@ public class InputParams extends BaseInputParams implements Serializable{
 
 
     public String getString(String key){
-        if (StringUtils.isBlank(paramMap.get(key))) {
+        if (StringUtils.isBlank(String.valueOf(paramMap.get(key)))
+                || StringUtils.equals(String.valueOf(paramMap.get(key)), "null")) {
             throw new IllegalArgumentException("get value by key [" + key +"] is null");
         }
-        return paramMap.get(key);
+        return String.valueOf(paramMap.get(key));
     }
 
-    public Map<String, String> getParamMap() {
+    public Map<String, Object> getParamMap() {
         return paramMap;
     }
 
-    public void setParamMap(Map<String, String> paramMap) {
+    public void setParamMap(Map<String, Object> paramMap) {
         this.paramMap = paramMap;
     }
 }
