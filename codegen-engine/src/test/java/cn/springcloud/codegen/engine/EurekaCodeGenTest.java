@@ -26,10 +26,10 @@ public class EurekaCodeGenTest {
 
         InputParams inputParams = new InputParams();
         inputParams.setDynamicOutPath("E:\\");
-        Map<String, String> paramMap = new HashMap<>();
+        Map<String, Object> paramMap = new HashMap<>();
         paramMap.put("basePackage", "com.springcloud.component");
         paramMap.put("pomArtifactId","eureka-server");
-        paramMap.put("pomName","eureka-server");
+        paramMap.put("projectName","eureka-server");
         paramMap.put("springBootVersion","1.5.9");
         paramMap.put("javaVersion","1.8");
         paramMap.put("moduleName","eureka-server-demo");

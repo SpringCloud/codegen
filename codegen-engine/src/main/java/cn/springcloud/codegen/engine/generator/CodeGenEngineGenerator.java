@@ -91,7 +91,7 @@ public abstract class CodeGenEngineGenerator implements TemplateConfigService {
         /**
          * 输出文件
          */
-        OutputStream fos = new FileOutputStream(getOutPutFile(FileTools.getOutPath(getOutPath(dataContext.getString("dynamicOutPath")), dataContext.getString("moduleName"), isJavaOrResourcesOrOtherCode(dataContext).getKey(), getClassPackageName(dataContext)), FileTools.getFinalFileName(dataContext.getString("fileName"), dataContext.getString("fileType"))));
+        OutputStream fos = new FileOutputStream(getOutPutFile(FileTools.getOutPath(getOutPath(dataContext.getString("dynamicOutPath")), dataContext.getString("pomArtifactId"), isJavaOrResourcesOrOtherCode(dataContext).getKey(), getClassPackageName(dataContext)), FileTools.getFinalFileName(dataContext.getString("fileName"), dataContext.getString("fileType"))));
         Writer out = new OutputStreamWriter(fos);
 
         /**

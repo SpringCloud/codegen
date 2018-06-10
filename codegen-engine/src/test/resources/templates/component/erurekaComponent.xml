@@ -23,7 +23,7 @@
 			<templateConfigEncode>UTF-8</templateConfigEncode>
 		</templateData>
 		<variableData>
-			<templateVariable key="serviceName" value="${moduleName}"/>
+			<templateVariable key="serviceName" value="${projectName}"/>
 		</variableData>
 		<fileData>
 			<fileType>properties</fileType>
@@ -39,7 +39,7 @@
 		</templateData>
 		<variableData>
 			<templateVariable key="pomArtifactId" value="${pomArtifactId}"/>
-			<templateVariable key="pomName" value="${pomName}"/>
+			<templateVariable key="projectName" value="${projectName}"/>
 			<templateVariable key="springBootVersion" value="${springBootVersion}"/>
 			<templateVariable key="javaVersion" value="${javaVersion}"/>
 		</variableData>

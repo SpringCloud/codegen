@@ -31,7 +31,7 @@
             <templateConfigEncode>UTF-8</templateConfigEncode>
         </templateData>
         <variableData>
-            <templateVariable key="serviceName" value="${moduleName}"/>
+            <templateVariable key="serviceName" value="${projectName}"/>
         </variableData>
         <fileData>
             <fileType>xml</fileType>

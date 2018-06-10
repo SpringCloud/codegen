@@ -2,7 +2,7 @@ package cn.springcloud.codegen.util;
 
 import cn.springcloud.codegen.engine.entity.InputParams;
 import cn.springcloud.codegen.engine.tools.ClassTools;
-import cn.springcloud.codegen.entity.DownloadConfig;
+import cn.springcloud.codegen.entity.ProjectModel;
 import cn.springcloud.codegen.service.ComponentExecutor;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
@@ -12,8 +12,6 @@ import org.springframework.http.ResponseEntity;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author Vincent.
@@ -27,11 +25,11 @@ public class CodeGenTransport {
         this.componentExecutor = componentExecutor;
     }
 
-    public ResponseEntity<Resource> downloadResponse(DownloadConfig downloadConfig) {
-        String canonicalFileName = downloadConfig.getModuleName();
+    public ResponseEntity<Resource> downloadResponse(ProjectModel projectModel) {
+        String canonicalFileName = projectModel.getProjectName();
 
         InputParams inputParams = new InputParams();
-        inputParams.setParamMap(ClassTools.buildFieldValueToMap(downloadConfig));
+        inputParams.setParamMap(ClassTools.buildFieldValueToMap(projectModel));
         byte[] bytes = componentExecutor.generate(inputParams);
 
         HttpHeaders headers = new HttpHeaders();

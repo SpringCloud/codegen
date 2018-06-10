@@ -31,7 +31,7 @@ public class ChooseComponentSelector implements GeneratorMetadataSelector {
                 String componentKey = String.valueOf(componentName);
                 List<GeneratorMetadata> componentMetadata = componentLoader.getComponentGeneratorMap().get(componentKey);
                 if (componentMetadata == null || componentMetadata.size() == 0){
-                    throw new IllegalArgumentException("not found [" + inputParams.getParamMap().get("componentKey") + "] component generator");
+                    throw new IllegalArgumentException("not found [" + componentKey + "] component generator");
                 }
                 generatorMetadata.addAll(componentMetadata);
             }

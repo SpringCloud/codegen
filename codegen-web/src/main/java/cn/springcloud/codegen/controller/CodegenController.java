@@ -1,8 +1,6 @@
 package cn.springcloud.codegen.controller;
 
-import cn.springcloud.codegen.engine.entity.InputParams;
-import cn.springcloud.codegen.engine.tools.ClassTools;
-import cn.springcloud.codegen.entity.DownloadConfig;
+import cn.springcloud.codegen.entity.ProjectModel;
 import cn.springcloud.codegen.service.ComponentExecutor;
 import cn.springcloud.codegen.util.CodeGenTransport;
 import freemarker.template.TemplateException;
@@ -15,8 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author Vincent.
@@ -29,8 +25,8 @@ public class CodegenController {
     private ComponentExecutor componentExecutor;
 
     @RequestMapping(value = "/download", method = RequestMethod.POST, consumes = "application/json")
-    public ResponseEntity<Resource> downloadResponse(@RequestBody DownloadConfig downloadConfig) throws IOException, TemplateException {
-        return new CodeGenTransport(componentExecutor).downloadResponse(downloadConfig);
+    public ResponseEntity<Resource> downloadResponse(@RequestBody ProjectModel projectModel) throws IOException, TemplateException {
+        return new CodeGenTransport(componentExecutor).downloadResponse(projectModel);
     }
 
 }

@@ -6,7 +6,7 @@ public class ProjectModel {
     private String proType;
     private String language;
     private String springBootVersion;
-    private String group;
+    private String groupId;
     private String pomArtifactId;
     private String projectName;
     private String basePackage;
@@ -39,12 +39,12 @@ public class ProjectModel {
         this.springBootVersion = springBootVersion;
     }
 
-    public String getGroup() {
-        return group;
+    public String getGroupId() {
+        return groupId;
     }
 
-    public void setGroup(String group) {
-        this.group = group;
+    public void setGroupId(String groupId) {
+        this.groupId = groupId;
     }
 
     public boolean isDockerTemplate() {
