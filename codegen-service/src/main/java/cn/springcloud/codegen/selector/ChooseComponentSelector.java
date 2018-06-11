@@ -4,6 +4,8 @@ import cn.springcloud.codegen.config.GeneratorMetadataSelector;
 import cn.springcloud.codegen.engine.entity.GeneratorMetadata;
 import cn.springcloud.codegen.engine.entity.InputParams;
 import cn.springcloud.codegen.support.ComponentLoader;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,8 @@ import java.util.List;
  **/
 @Service
 public class ChooseComponentSelector implements GeneratorMetadataSelector {
+
+    private Logger logger = LoggerFactory.getLogger(getClass());
 
     @Autowired
     private ComponentLoader componentLoader;
@@ -31,7 +35,10 @@ public class ChooseComponentSelector implements GeneratorMetadataSelector {
                 String componentKey = String.valueOf(componentName);
                 List<GeneratorMetadata> componentMetadata = componentLoader.getComponentGeneratorMap().get(componentKey);
                 if (componentMetadata == null || componentMetadata.size() == 0){
-                    throw new IllegalArgumentException("not found [" + componentKey + "] component generator");
+//                    throw new IllegalArgumentException("not found [" + componentKey + "] component generator");
+                    // TODO 暂时无可选组件，不做报错处理
+                    logger.warn("not found [" + componentKey + "] component generator");
+                    continue;
                 }
                 generatorMetadata.addAll(componentMetadata);
             }
