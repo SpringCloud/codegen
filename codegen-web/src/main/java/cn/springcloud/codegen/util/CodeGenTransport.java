@@ -43,7 +43,7 @@ public class CodeGenTransport {
         InputStream inputStream = new ByteArrayInputStream(bytes);
         Resource resource = new InputStreamResource(inputStream);
 
-        return ResponseEntity.ok().headers(headers).contentType(MediaType.parseMediaType("application/x-msdownload")).body(resource);
+        return ResponseEntity.ok().headers(headers).contentType(MediaType.parseMediaType("application/octet-stream")).body(resource);
     }
 
 //    private Map<String,String> changeMapValueToString(Map<String, Object> downloadConfigMap) {
