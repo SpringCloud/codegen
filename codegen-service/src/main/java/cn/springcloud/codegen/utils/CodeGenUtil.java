@@ -21,7 +21,7 @@ public class CodeGenUtil {
      * @return
      */
     public static String getCodegenTempGeneratePath() {
-        String tempGeneratePath = formatGeneratePath(System.getProperty("java.io.tmpdir")) + "codegen";
+        String tempGeneratePath = formatGeneratePath(System.getProperty("java.io.tmpdir")) + "codegen/" + UUIDHelper.random();
         return tempGeneratePath;
     }
 }
