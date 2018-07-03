@@ -1,5 +1,7 @@
 package cn.springcloud.codegen.utils;
 
+import java.util.UUID;
+
 /**
  * @author xujin
  */
@@ -21,7 +23,7 @@ public class CodeGenUtil {
      * @return
      */
     public static String getCodegenTempGeneratePath() {
-        String tempGeneratePath = formatGeneratePath(System.getProperty("java.io.tmpdir")) + "codegen/" + UUIDHelper.random();
+        String tempGeneratePath = formatGeneratePath(System.getProperty("java.io.tmpdir")) + UUIDHelper.random() + "/" +"codegen";
         return tempGeneratePath;
     }
 }
