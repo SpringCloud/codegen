@@ -43,7 +43,7 @@ public class ComponentLoader implements InitializingBean {
     public void afterPropertiesSet() throws Exception {
         try {
             // 获取所有匹配的文件
-            Enumeration<URL> urls = ClassLoader.getSystemResources(DEFAULT_COMPONENT_CONFIG_LOCATION);
+            Enumeration<URL> urls = ClassUtils.getDefaultClassLoader().getResources(DEFAULT_COMPONENT_CONFIG_LOCATION);
             while (urls.hasMoreElements()) {
                 URL url = urls.nextElement();
                 URLConnection con = url.openConnection();
@@ -51,6 +51,7 @@ public class ComponentLoader implements InitializingBean {
                 if (componentMetadata == null || componentMetadata.getComponentId() == null){
                     throw new IllegalArgumentException("component xml load has error, please check componentConfig.xml");
                 }
+                logger.info("test......." + componentMetadata.getComponentId());
                 componentGeneratorData.put(componentMetadata.getComponentId(), componentMetadata.getGeneratorData());
                 addGeneratorDataByType(componentMetadata);
             }
