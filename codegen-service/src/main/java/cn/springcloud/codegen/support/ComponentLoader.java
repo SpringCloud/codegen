@@ -51,7 +51,6 @@ public class ComponentLoader implements InitializingBean {
                 if (componentMetadata == null || componentMetadata.getComponentId() == null){
                     throw new IllegalArgumentException("component xml load has error, please check componentConfig.xml");
                 }
-                logger.info("test......." + componentMetadata.getComponentId());
                 componentGeneratorData.put(componentMetadata.getComponentId(), componentMetadata.getGeneratorData());
                 addGeneratorDataByType(componentMetadata);
             }
