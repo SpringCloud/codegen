@@ -4,6 +4,7 @@ import cn.springcloud.codegen.engine.entity.InputParams;
 import cn.springcloud.codegen.engine.tools.ClassTools;
 import cn.springcloud.codegen.entity.ProjectModel;
 import cn.springcloud.codegen.service.ComponentExecutor;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
@@ -12,6 +13,8 @@ import org.springframework.http.ResponseEntity;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 /**
  * @author Vincent.
@@ -25,8 +28,14 @@ public class CodeGenTransport {
         this.componentExecutor = componentExecutor;
     }
 
+    public byte[] downloadBytes(ProjectModel projectModel) {
+        InputParams inputParams = new InputParams();
+        inputParams.setParamMap(ClassTools.buildFieldValueToMap(projectModel));
+        return componentExecutor.generate(inputParams);
+    }
+
     public ResponseEntity<Resource> downloadResponse(ProjectModel projectModel) {
-        String canonicalFileName = projectModel.getProjectName();
+        String canonicalFileName = getCanonicalFileName(projectModel.getProjectName());
 
         InputParams inputParams = new InputParams();
         inputParams.setParamMap(ClassTools.buildFieldValueToMap(projectModel));
@@ -43,12 +52,17 @@ public class CodeGenTransport {
         InputStream inputStream = new ByteArrayInputStream(bytes);
         Resource resource = new InputStreamResource(inputStream);
 
-        return ResponseEntity.ok().headers(headers).contentType(MediaType.parseMediaType("application/octet-stream")).body(resource);
+        return ResponseEntity.ok().headers(headers).contentType(MediaType.parseMediaType("application/x-msdownload")).body(resource);
     }
 
-//    private Map<String,String> changeMapValueToString(Map<String, Object> downloadConfigMap) {
-//        Map<String, String> paramMap = new HashMap<>();
-//        downloadConfigMap.forEach((k,v)-> paramMap.put(k, String.valueOf(v)));
-//        return paramMap;
-//    }
+    private String getCanonicalFileName(String fileName) {
+        if (StringUtils.isEmpty(fileName)) {
+            throw new IllegalArgumentException("File name is null or empty");
+        }
+        try {
+            return URLEncoder.encode(fileName + ".zip", "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            throw new IllegalArgumentException(e.getMessage(), e);
+        }
+    }
 }

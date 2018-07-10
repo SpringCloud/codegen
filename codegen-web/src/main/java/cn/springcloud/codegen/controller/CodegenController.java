@@ -29,4 +29,8 @@ public class CodegenController {
         return new CodeGenTransport(componentExecutor).downloadResponse(projectModel);
     }
 
+    @RequestMapping(value = "/download/bytes", method = RequestMethod.POST, consumes = "application/json")
+    public byte[] downloadBytes(@RequestBody ProjectModel projectModel) throws IOException, TemplateException {
+        return new CodeGenTransport(componentExecutor).downloadBytes(projectModel);
+    }
 }
