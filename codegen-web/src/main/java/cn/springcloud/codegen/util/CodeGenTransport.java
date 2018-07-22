@@ -54,7 +54,7 @@ public class CodeGenTransport {
         headers.add("Content-Disposition", "attachment;filename=\"" + canonicalFileName + "\"");
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_OCTET_STREAM)
-                .header("Content-Disposition", "attachment; filename=test.zip")
+                .header("Content-Disposition", "attachment; filename=" + canonicalFileName + ".zip")
                 .body(new InputStreamResource(new ByteArrayInputStream(bytes)));
 
     }
