@@ -12,9 +12,13 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.net.URISyntaxException;
 import java.net.URLEncoder;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 /**
  * @author Vincent.
@@ -34,7 +38,7 @@ public class CodeGenTransport {
         return componentExecutor.generate(inputParams);
     }
 
-    public ResponseEntity<Resource> downloadResponse(ProjectModel projectModel) {
+    public ResponseEntity<Resource> downloadResponse(ProjectModel projectModel) throws URISyntaxException, IOException {
         String canonicalFileName = getCanonicalFileName(projectModel.getProjectName());
 
         InputParams inputParams = new InputParams();
@@ -48,11 +52,11 @@ public class CodeGenTransport {
         headers.add("charset", "utf-8");
 
         headers.add("Content-Disposition", "attachment;filename=\"" + canonicalFileName + "\"");
+        return ResponseEntity.ok()
+                .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                .header("Content-Disposition", "attachment; filename=test.zip")
+                .body(new InputStreamResource(new ByteArrayInputStream(bytes)));
 
-        InputStream inputStream = new ByteArrayInputStream(bytes);
-        Resource resource = new InputStreamResource(inputStream);
-
-        return ResponseEntity.ok().headers(headers).contentType(MediaType.parseMediaType("application/x-msdownload")).body(resource);
     }
 
     private String getCanonicalFileName(String fileName) {
