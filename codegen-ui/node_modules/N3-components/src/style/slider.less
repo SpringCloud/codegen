@@ -1,0 +1,137 @@
+.@{prefix-cls}-slider {
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
+
+  &-horizontal {
+    height: @sliderHorizontalHeight;
+    margin-right: @sliderHandler;
+  }
+
+  &-horizontal &-track {
+    height: @sliderHeight;
+    width: 100%;
+    top: (@sliderHorizontalHeight -  @sliderHeight)/2;
+    left: 0;
+  }
+
+  &-horizontal &-selection,
+  &-horizontal &-track-low,
+  &-horizontal &-track-high {
+    height: 100%;
+    top: 0;
+    bottom: 0;
+  }
+
+  &-horizontal &-handle {
+    margin-left: @sliderHandlerLeft;
+    margin-top: @sliderHandlerTop;
+  }
+
+  &-vertical {
+    width: @sliderVerticalWidth;
+    margin-bottom: @sliderHandler;
+  }
+  &-vertical &-track {
+    width: @sliderWidth;
+    height: 100%;
+    margin-left: -5px;
+    left: 50%;
+    top: 0;
+  }
+  &-vertical &-selection {
+    width: 100%;
+    left: 0;
+    top: 0;
+    bottom: 0;
+  }
+  &-vertical &-track-low,
+  &-vertical &-track-high {
+    width: 100%;
+    left: 0;
+    right: 0;
+  }
+  &-vertical &-handle {
+    margin-left: @sliderVerticalHandlerLeft;
+    margin-top: @sliderVerticalHandlerTop;
+  }
+  
+  &-disabled &-handle {
+    background-image: linear-gradient(to bottom, @hoverColor 0%, @lightGrayColor 100%);
+    background-repeat: repeat-x;
+  }
+  &-disabled &-track {
+    background-image: linear-gradient(to bottom, @hoverColor 0%,  @lightGrayColor 100%);
+    background-repeat: repeat-x;
+    cursor: not-allowed;
+  }
+  input {
+    display: none;
+  }
+  
+  .@{prefix-cls}-tooltip-inner {
+    white-space: nowrap;
+  }
+  &-hide {
+    display: none;
+  }
+  &-track {
+    position: absolute;
+    cursor: pointer;
+    background: @lightColor;
+    border-radius: 4px;
+  }
+  &-selection {
+    position: absolute;
+    background: @primaryColor;
+    box-sizing: border-box;
+    border-radius: 4px;
+  }
+ 
+  &-track-low,
+  &-track-high {
+    position: absolute;
+    background: transparent;
+    box-sizing: border-box;
+    border-radius: 4px;
+  }
+  &-handle {
+    position: absolute;
+    width: @sliderHandler;
+    height: @sliderHandler;
+    background-color: @whiteColor;
+    border: @sliderHandlerBorder solid @primaryColor;
+  }
+  &-handle&-round {
+    border-radius: 50%;
+  }
+
+  &-vertical &-selection{
+    height: 0%;
+  }
+  &-vertical &-track-high{
+    height: 100%;
+  }
+  .@{prefix-cls}-tooltip.@{prefix-cls}-tooltip-top {
+    margin-top: @sliderHorizontalTipTop;
+  }
+  &-horizontal .@{prefix-cls}-tooltip.@{prefix-cls}-tooltip-top{
+    margin-left: @sliderHorizontalTipLeft;
+  }
+  &-vertical .@{prefix-cls}-tooltip.@{prefix-cls}-tooltip-right{
+    margin-top: @sliderVerticalTipTop;
+    margin-left: @sliderVerticalTipLeft;
+  }
+  .@{prefix-cls}-tooltip&-slider-tooltip-always{
+      display: block!important;
+  }
+  .@{prefix-cls}-tooltip&-slider-tooltip-hide{
+      display: none!important;
+  }
+}
+
+
+
+
+
+

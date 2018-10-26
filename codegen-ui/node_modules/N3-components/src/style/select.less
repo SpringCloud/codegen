@@ -1,0 +1,92 @@
+.@{prefix-cls}-select-group{
+
+  .@{prefix-cls}-selected-tag {
+    background: @lightColor;
+    padding: @selectTag;
+    margin-right: 5px;
+    border-radius: 4px;
+    margin-bottom: 3px;
+    transition: all .24s ease;
+    &:hover{
+      background: @lightGrayColor;
+    }
+    &:after{
+      content: "\F00D";
+      font: normal normal normal 14px/1 FontAwesome;
+      margin-left: 5px;
+      color: @grayColor;
+    }
+  }
+  .@{prefix-cls}-select-multiple {
+    padding: @selectMultiple!important;
+  }
+  .@{prefix-cls}-select-btn {
+    min-height:@selectMinHeight;
+    &:hover{
+      color:@fontColor!important;
+    }
+  }
+
+  .@{prefix-cls}-select-search{
+    border: 0px;
+    outline: none;
+    padding: @selectPadding;
+    border-bottom: 1px solid @lightGrayColor;
+  }
+
+  .@{prefix-cls}-dropdown-menu{
+    display: block;
+    overflow-y: auto;
+    
+    .@{prefix-cls}-notify {
+      position: absolute;
+      bottom: 5px;
+      width: 96%;
+      margin: 0 2%;
+      min-height: 26px;
+      padding: 3px 5px;
+      background: @lightColor;
+      border: 1px solid @lightGrayColor;
+      box-shadow: inset 0 1px 1px rgba(0,0,0,.05);
+      pointer-events: none;
+    }
+    .@{prefix-cls}-fa-check {
+      position: absolute;
+      display: inline-block;
+      right: 10px;
+      top: 10px;
+    }
+    .@{prefix-cls}-fa-plus-square-o {
+      font-size: 20px;
+      position: absolute;
+      top: 7px;
+      right: 10px;
+    }
+    .@{prefix-cls}-select-all{
+      position: relative;
+      border-bottom: 1px solid @lightGrayColor;
+      a {
+        cursor: pointer;
+      }
+    }
+  }
+
+  .@{prefix-cls}-dropdown-toggle{
+    text-align: left;
+    display: flex;
+    align-items: center;
+    padding: @selectPadding; 
+    & > i {
+      position: absolute;
+      right: @selectArrowLeft;
+      top: 50%;
+      margin-top: -7px;
+    }
+    & > span{
+      display: flex; 
+      flex-wrap: wrap; 
+      align-items: flex-start; 
+    }
+  }
+  
+}

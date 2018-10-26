@@ -1,0 +1,58 @@
+.@{prefix-cls}-multiple-input{
+  font-size: 0px;
+  letter-spacing: 0px;
+  min-height: @multipleinputMinHeight;
+  height: auto;
+  padding: @multipleinputPadding;
+  display: flex;
+  flex-wrap:wrap;
+  align-items: flex-start;
+  align-content: flex-start;
+
+
+  .@{prefix-cls}-form-control{
+    border: 0px;
+    outline: none;
+    position: relative;
+    top: -2px;
+    margin: 0px;
+    padding: 0px;
+    height: 22px;
+  }
+  
+  .@{prefix-cls}-multiple-input-space{
+    display: inline-block;
+    width:8px;
+    height: 22px;
+    
+    &:first-child{
+      margin-left:-8px;
+    }
+
+    &:hover{
+      cursor: text;
+    }
+    &.@{prefix-cls}-multiple-input-long{
+      flex:1;
+    }
+  }
+  
+  .@{prefix-cls}-multiple-input-m-tag,input,.@{prefix-cls}-multiple-input-space{
+    vertical-align: top;
+    font-size: 14px;
+    margin-bottom: 3px;
+  }
+  .@{prefix-cls}-multiple-input-m-tag:hover{
+    cursor: pointer;
+    background: @lightGrayColor;
+  }
+  .@{prefix-cls}-multiple-input-m-tag{
+    background: @lightColor;
+    padding: 0px 10px;
+    border-radius: 5px;
+    transition:background .24s ease;
+   .@{prefix-cls}-multiple-close{
+      color:@grayColor;
+    }
+  }
+}

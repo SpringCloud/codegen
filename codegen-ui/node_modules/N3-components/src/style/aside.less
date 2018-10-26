@@ -1,0 +1,65 @@
+.@{prefix-cls}-aside-open {
+  transition: transform 0.3s;
+  &.has-push-right {
+    transform: translateX(-300px);
+  }
+}
+
+.@{prefix-cls}-aside {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    z-index: 1049;
+    overflow: auto;
+    background: @whiteColor;
+
+    &-left{
+      left: 0;
+      right: auto;
+    }
+    &-right{
+      left: auto;
+      right: 0;
+    }
+    &:focus {
+      outline: 0
+    }
+
+    &-dialog {
+      .@{prefix-cls}-aside-header {
+        min-height: 16.43px;
+        padding: 6px 15px;
+        background: @primaryColor;
+        color: @whiteColor;
+
+        .@{prefix-cls}-close {
+          margin-right: -8px;
+          padding: 4px 8px;
+          color: @whiteColor;
+          font-size: 25px;
+          opacity: .8;
+        }        
+      }
+
+      .@{prefix-cls}-aside-body {
+        position: relative;
+        padding: 15px;
+      }
+
+    }
+
+    &-backdrop {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 1040;
+      opacity: 0;
+      transition: opacity .3s ease;
+      background-color: @blackColor;
+    }
+    &-in {
+      opacity: .5;
+    }
+}

@@ -1,0 +1,48 @@
+.@{prefix-cls}-timepicker{
+  display: inline-block;
+  position: relative;
+  &-slider{
+    margin-top: 20px;
+  }
+  &-popup{
+      position: absolute;
+      background: @whiteColor;
+      margin-top: 2px;
+      z-index: 1000;
+      box-shadow: @dateShadow;
+      padding: @timepickerPadding;
+      .slider-sin-wrap:after{
+        top:5px;
+      }
+  }
+  &-slider{
+    padding: @timepickerSlierPadding;
+  }
+  &-slider-sin-wrap {
+    float: left;
+    height: @timepickerSliderHeight;
+    margin: @timepickerSliderMargin;
+    position: relative;
+
+
+    & > span {
+      padding-left: 2px;
+      font-size: 16px;
+      font-weight: 700;
+      display: block;
+    }
+
+    &:after {
+      content: ":";
+      position: absolute;
+      top: 1px;
+      left: 32px;
+    }
+    &:last-child:after{
+      content: '';
+    };
+    &:last-child:after {
+      display: none;
+    }
+  }
+}

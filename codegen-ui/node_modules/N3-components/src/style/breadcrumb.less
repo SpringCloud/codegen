@@ -1,0 +1,24 @@
+.@{prefix-cls}-breadcrumb {
+  padding:@breadcrumbPadding;
+  list-style: none;
+  margin: 0px;
+
+  a {
+    color:@fontColor;
+  }
+
+  > li {
+    display: inline-block;
+    &:hover{
+      cursor:pointer;
+    }
+  }
+  > li + li:before {
+    padding: 0 5px;
+    color: @grayColor;
+    content: "/\00a0";
+  }
+  > .@{prefix-cls}-breadcrumb-active {
+    color: @primaryColor;
+  }
+}

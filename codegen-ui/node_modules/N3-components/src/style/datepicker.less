@@ -1,0 +1,101 @@
+.@{prefix-cls}-datepicker{
+    position: relative;
+    display: inline-block;
+    font-size: 13px;
+    &-popup{
+        position: absolute;
+        border: @dateBorder;
+        background: @whiteColor;
+        margin-top: 2px;
+        z-index: 1000;
+        box-shadow: @dateShadow;
+    }
+    &-inner{
+        width: @datepickerWidth;
+
+    }
+    &-ctrl p,
+    &-ctrl span,
+    &-body span{
+        display: inline-block;
+        width: @datepickerSpanSize;
+        line-height: @datepickerSpanSize;
+        height: @datepickerSpanSize;
+        border-radius: @datepickerSpanRadius;
+    }
+    &-ctrl p {
+        width: 65%;
+        margin: 0px;
+    }
+    &-ctrl span {
+      position: absolute;
+    }
+    &-body span {
+      text-align: center;
+    }
+    &-mouthRange span{
+        width: @datepickerRangeSize;
+        height: @datepickerRangeSize;
+        line-height: @datepickerRangeSize;
+        margin:2px 18px;
+    }
+    &-item-disable {
+      background-color: white!important;
+      cursor: not-allowed!important;
+    }
+    .@{prefix-cls}-datepicker-decadeRange span:first-child,
+    .@{prefix-cls}-datepicker-decadeRange span:last-child,
+    &-item-disable,
+    &-item-gray{
+        color: @grayColor;
+    }
+    
+    &-dateRange-item-active:hover,
+    &-dateRange-item-active {
+        background: @primaryColor !important;
+        color: white!important;
+    }
+    &-mouthRange {
+      margin-bottom: 10px;
+      margin-left:10px;
+    }
+    &-mouthRange span,
+    &-ctrl span,
+    &-ctrl p,
+    &-dateRange span {
+      transition: all .3s ease;
+      cursor: pointer;
+    }
+    &-mouthRange span:hover,
+    &-ctrl p:hover,
+    &-ctrl i:hover,
+    &-dateRange span:hover,
+    &-dateRange-item-hover {
+        background-color : @hoverColor;
+    }
+    &-weekRange{
+      border-bottom: 1px solid @lightGrayColor;
+      border-top:1px solid @lightGrayColor;
+    }
+
+    &-weekRange span{
+        font-weight: bold;
+    }
+    &-ctrl{
+        position: relative;
+        height: @datepicerCtrlHeight;
+        line-height: @datepicerCtrlHeight;
+        font-weight: bold;
+        text-align: center;
+    }
+    .@{prefix-cls}-month-btn{
+      font-weight: bold;
+      user-select:none;
+    }
+    &-preBtn{
+        left: 2px;
+    }
+    &-nextBtn{
+        right: 2px;
+    }
+}

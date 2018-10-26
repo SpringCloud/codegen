@@ -1,0 +1,54 @@
+.@{prefix-cls}-input-con{
+  position: relative;
+  .@{prefix-cls}-input-show-clean,.@{prefix-cls}-input-show-icon{
+    font-size: @cleanSize;
+    position: absolute;
+    top: @cleanTop;
+    right: @cleanRight;
+    opacity: 0;
+    transition: opacity 0.1s linear;
+    cursor: pointer;
+    color:@grayColor;
+  }
+  .@{prefix-cls}-input-show-icon{
+    opacity: 1;
+  }
+
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button{
+      -webkit-appearance: none !important;
+      margin: 0; 
+  }
+  input[type="number"]{-moz-appearance:textfield;}
+
+  &.@{prefix-cls}-show-clean input,&.@{prefix-cls}-show-icon input{
+    padding-right: @inputCleanRight;
+  }
+  &.@{prefix-cls}-show-clean:hover .@{prefix-cls}-input-show-icon{
+    display:none;
+  }
+
+  &:hover .@{prefix-cls}-input-show-clean{
+    opacity: 1;
+  }
+
+  .@{prefix-cls}-form-control[readonly]{
+    background-color: @whiteColor;
+  }
+  .@{prefix-cls}-form-control[disabled]{
+    background-color: @lightColor;
+  }
+  .@{prefix-cls}-form-control[readonly]{
+    cursor: pointer;
+    &:hover{
+      cursor: pointer;
+    }
+  }
+  .@{prefix-cls}-form-control[disabled]{
+    cursor: not-allowed;
+    &:hover{
+      cursor: not-allowed;
+    }
+  }
+}
+
