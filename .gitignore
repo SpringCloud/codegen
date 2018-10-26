@@ -79,4 +79,5 @@ __pycache__/
 # SVN metadata
 .svn/
 
+/codegen-ui/node_modules/
 
