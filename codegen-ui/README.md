@@ -43,3 +43,21 @@ npm run build
 
 ```
 
+
+### Nginx config
+server {
+        listen       80;
+        server_name  http://start.springcloud.cn/;
+        charset utf-8;
+        access_log  logs/start.springcloud.cn.access.log  main;
+        location / {
+                root /root/codegen-ui/dist;
+                index index.html;
+                try_files $uri $uri/ /index.html;
+        }
+        location ^~/api/v1/ {
+                proxy_pass http://127.0.0.1:3333/;
+                proxy_set_header Host $host:3333;
+        }
+}
+###
